@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>할인스탬프 — 오늘도 확인한 할인코드</title>
+<title>할인스탬프 — 오늘도 확인한 할인쿠폰</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
@@ -198,13 +198,13 @@
     </svg>
   </div>
   <div class="logo" id="logoHome"><span class="badge">✓</span>할인스탬프</div>
-  <div class="tagline">매달 확인하고 도장 찍은, 진짜 할인코드만</div>
+  <div class="tagline">매달 확인하고 도장 찍은, 진짜 할인쿠폰만</div>
 </header>
 
 <div class="cat-toggle" id="catToggle">
   <button class="cat-btn active" data-cat="home">🏠 홈</button>
-  <button class="cat-btn" data-cat="travel">✈️ 여행 할인</button>
-  <button class="cat-btn" data-cat="commerce">🛍 쇼핑 할인</button>
+  <button class="cat-btn" data-cat="travel">✈️ 여행 할인쿠폰</button>
+  <button class="cat-btn" data-cat="commerce">🛍 쇼핑 할인쿠폰</button>
   <button class="cat-btn" data-cat="card">💳 카드 혜택</button>
   <button class="cat-btn" data-cat="guide">💡 꿀팁가이드</button>
 </div>
@@ -222,8 +222,8 @@
 <script>
 const catConfig = {
   home:     { label:'🏠 홈', views:[] },
-  travel:   { label:'✈️ 여행 할인', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
-  commerce: { label:'🛍 쇼핑 할인', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'},{key:'best',label:'베스트 상품'}] },
+  travel:   { label:'✈️ 여행 할인쿠폰', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
+  commerce: { label:'🛍 쇼핑 할인쿠폰', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'},{key:'best',label:'베스트 상품'}] },
   card:     { label:'💳 카드 혜택', views:[{key:'credit',label:'신용카드'},{key:'check',label:'체크카드'},{key:'bytag',label:'혜택 유형별'}] },
   guide:    { label:'💡 꿀팁가이드', views:[{key:'list',label:'전체 글'}] },
 };
@@ -233,7 +233,7 @@ const data = {
     brands: [
       { platform:'아고다', icon:'🏨', img:'http://img.linkprice.com/files/glink/agoda/20191122/5dd79f9315f7b_120_60.jpg', codes:[
         { code:'NEW14AGD1', desc:'신규 고객 전 지역 14% 할인 (최대 $100)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=agoda&a=A100681208&l=0000' },
-        { code:'LPAGDKR10', desc:'국내 지역 5% 할인코드', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=agoda&a=A100681208&l=0000' },
+        { code:'LPAGDKR10', desc:'국내 지역 5% 할인쿠폰', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=agoda&a=A100681208&l=0000' },
       ]},
       { platform:'에어알로', icon:'📶', img:'https://img.linkprice.com/files/glink/airalo/20230406/e00xVgcWzw680_120_60.png', codes:[
         { code:'AIRKR15', desc:'전 고객 15% 할인 (다회 사용 가능, eSIM)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=airalo&a=A100681208&l=0000' },
@@ -392,7 +392,7 @@ const data = {
   },
   guide: {
     list: [
-      { title:'할인코드 안 먹힐 때, 이 5가지부터 확인하세요', excerpt:'쿠폰 적용 실패 시 흔한 원인과 해결법 정리', tag:'문제해결', date:'8월 2주차' },
+      { title:'할인쿠폰 안 먹힐 때, 이 5가지부터 확인하세요', excerpt:'쿠폰 적용 실패 시 흔한 원인과 해결법 정리', tag:'문제해결', date:'8월 2주차' },
       { title:'해외여행 카드 뭘 챙겨야 할까 — 체크리스트', excerpt:'출국 전 카드 혜택 미리 세팅하는 법', tag:'여행준비', date:'8월 1주차' },
     ]
   }
@@ -511,7 +511,7 @@ function renderViewToggle(keepCurrent) {
 
 function renderTicketsForBrand(cat, brand) {
   if (!brand.codes.length) {
-    return `<div class="empty-note">아직 검증된 할인코드가 없어요. 확인되는 대로 채워드릴게요!</div>`;
+    return `<div class="empty-note">아직 검증된 할인쿠폰이 없어요. 확인되는 대로 채워드릴게요!</div>`;
   }
   return `<div class="ticket-grid">${brand.codes.map(item => `
     <div class="ticket" data-cat="${cat}">
@@ -544,14 +544,14 @@ function renderMain() {
         <p>매달 정기적으로 직접 확인하고 표시해요. 안 되는 코드로 시간 낭비하지 마세요.</p>
       </div>
       <div class="home-tiles">
-        <button class="home-tile" data-cat="travel"><span class="tile-icon">✈️</span><span class="tile-name">여행 할인</span><span class="tile-count">${data.travel.brands.length}개 브랜드</span></button>
-        <button class="home-tile" data-cat="commerce"><span class="tile-icon">🛍</span><span class="tile-name">쇼핑 할인</span><span class="tile-count">${data.commerce.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="travel"><span class="tile-icon">✈️</span><span class="tile-name">여행 할인쿠폰</span><span class="tile-count">${data.travel.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="commerce"><span class="tile-icon">🛍</span><span class="tile-name">쇼핑 할인쿠폰</span><span class="tile-count">${data.commerce.brands.length}개 브랜드</span></button>
         <button class="home-tile" data-cat="card"><span class="tile-icon">💳</span><span class="tile-name">카드 혜택</span><span class="tile-count">${data.card.issuers.length}개 카드사</span></button>
         <button class="home-tile" data-cat="guide"><span class="tile-icon">💡</span><span class="tile-name">꿀팁가이드</span><span class="tile-count">${data.guide.list.length}개 글</span></button>
       </div>
-      <div class="home-section-title">✈️ 여행 할인 인기 브랜드</div>
+      <div class="home-section-title">✈️ 여행 할인쿠폰 인기 브랜드</div>
       <div class="brand-grid" id="homeTravelGrid" style="margin-bottom:32px;"></div>
-      <div class="home-section-title">🛍 쇼핑 할인 인기 브랜드</div>
+      <div class="home-section-title">🛍 쇼핑 할인쿠폰 인기 브랜드</div>
       <div class="brand-grid" id="homeCommerceGrid"></div>
     `;
     document.querySelectorAll('.home-tile').forEach(btn => {
