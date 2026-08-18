@@ -203,8 +203,8 @@
 
 <div class="cat-toggle" id="catToggle">
   <button class="cat-btn active" data-cat="home">🏠 홈</button>
-  <button class="cat-btn" data-cat="travel">✈️ 여행 쿠폰</button>
-  <button class="cat-btn" data-cat="commerce">🛍 쇼핑 할인코드</button>
+  <button class="cat-btn" data-cat="travel">✈️ 여행 할인</button>
+  <button class="cat-btn" data-cat="commerce">🛍 쇼핑 할인</button>
   <button class="cat-btn" data-cat="card">💳 카드 혜택</button>
   <button class="cat-btn" data-cat="guide">💡 꿀팁가이드</button>
 </div>
@@ -222,8 +222,8 @@
 <script>
 const catConfig = {
   home:     { label:'🏠 홈', views:[] },
-  travel:   { label:'✈️ 여행 쿠폰', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
-  commerce: { label:'🛍 쇼핑 할인코드', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'}] },
+  travel:   { label:'✈️ 여행 할인', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
+  commerce: { label:'🛍 쇼핑 할인', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'}] },
   card:     { label:'💳 카드 혜택', views:[{key:'credit',label:'신용카드'},{key:'check',label:'체크카드'},{key:'bytag',label:'혜택 유형별'}] },
   guide:    { label:'💡 꿀팁가이드', views:[{key:'list',label:'전체 글'}] },
 };
@@ -523,14 +523,14 @@ function renderMain() {
         <p>매달 정기적으로 직접 확인하고 표시해요. 안 되는 코드로 시간 낭비하지 마세요.</p>
       </div>
       <div class="home-tiles">
-        <button class="home-tile" data-cat="travel"><span class="tile-icon">✈️</span><span class="tile-name">여행 쿠폰</span><span class="tile-count">${data.travel.brands.length}개 브랜드</span></button>
-        <button class="home-tile" data-cat="commerce"><span class="tile-icon">🛍</span><span class="tile-name">쇼핑 할인코드</span><span class="tile-count">${data.commerce.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="travel"><span class="tile-icon">✈️</span><span class="tile-name">여행 할인</span><span class="tile-count">${data.travel.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="commerce"><span class="tile-icon">🛍</span><span class="tile-name">쇼핑 할인</span><span class="tile-count">${data.commerce.brands.length}개 브랜드</span></button>
         <button class="home-tile" data-cat="card"><span class="tile-icon">💳</span><span class="tile-name">카드 혜택</span><span class="tile-count">${data.card.issuers.length}개 카드사</span></button>
         <button class="home-tile" data-cat="guide"><span class="tile-icon">💡</span><span class="tile-name">꿀팁가이드</span><span class="tile-count">${data.guide.list.length}개 글</span></button>
       </div>
-      <div class="home-section-title">✈️ 여행 쿠폰 인기 브랜드</div>
+      <div class="home-section-title">✈️ 여행 할인 인기 브랜드</div>
       <div class="brand-grid" id="homeTravelGrid" style="margin-bottom:32px;"></div>
-      <div class="home-section-title">🛍 쇼핑 할인코드 인기 브랜드</div>
+      <div class="home-section-title">🛍 쇼핑 할인 인기 브랜드</div>
       <div class="brand-grid" id="homeCommerceGrid"></div>
     `;
     document.querySelectorAll('.home-tile').forEach(btn => {
