@@ -223,7 +223,7 @@
 const catConfig = {
   home:     { label:'🏠 홈', views:[] },
   travel:   { label:'✈️ 여행 할인', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
-  commerce: { label:'🛍 쇼핑 할인', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'}] },
+  commerce: { label:'🛍 쇼핑 할인', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'},{key:'best',label:'베스트 상품'}] },
   card:     { label:'💳 카드 혜택', views:[{key:'credit',label:'신용카드'},{key:'check',label:'체크카드'},{key:'bytag',label:'혜택 유형별'}] },
   guide:    { label:'💡 꿀팁가이드', views:[{key:'list',label:'전체 글'}] },
 };
@@ -313,7 +313,8 @@ const data = {
         { code:'B0578B70-BD8A-422B', desc:'포토북 전상품 48% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=snaps&a=A100681208&l=0000' },
       ]},
     ],
-    hotdeal: [] // 실행 시 data/hotdeal.json을 fetch해서 채워짐 (아래 loadHotdeal 함수)
+    hotdeal: [], // 실행 시 data/hotdeal.json을 fetch해서 채워짐 (아래 loadHotdeal 함수)
+    bestproducts: [] // 실행 시 data/bestproducts.json을 fetch해서 채워짐
   },
   card: {
     issuers: [
@@ -399,6 +400,7 @@ const data = {
 
 let currentCat = 'home';
 let hotdealLoadFailed = false;
+let bestLoadFailed = false;
 
 // data/hotdeal.json은 GitHub Actions가 매일 자동 갱신함
 async function loadHotdeal() {
@@ -416,6 +418,22 @@ async function loadHotdeal() {
   if (currentCat === 'commerce' && currentView === 'hotdeal') renderMain();
 }
 loadHotdeal();
+
+// data/bestproducts.json도 GitHub Actions가 매일 자동 갱신함 (링크프라이스 잘팔리는 상품 API)
+async function loadBestProducts() {
+  try {
+    const res = await fetch('./data/bestproducts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('fetch failed');
+    const json = await res.json();
+    if (Array.isArray(json) && json.length) {
+      data.commerce.bestproducts = json;
+    }
+  } catch (e) {
+    bestLoadFailed = true;
+  }
+  if (currentCat === 'commerce' && currentView === 'best') renderMain();
+}
+loadBestProducts();
 let currentView = null;
 let selectedBrand = null; // {cat, platform}
 let selectedIssuer = null;
@@ -566,8 +584,8 @@ function renderMain() {
             <div class="item-excerpt">${item.excerpt}</div>
           </div>
         </div>`).join('')}</div>`;
-    } else {
-      // commerce hotdeal, grouped by category1 (링크프라이스 API 원본 필드명 그대로 사용)
+    } else if (currentView === 'hotdeal') {
+      // commerce hotdeal, grouped by category1 (지마켓 TOP100/베스트 API 원본 필드명)
       const items = data.commerce.hotdeal;
       if (!items.length) {
         main.innerHTML = `<div class="empty-note">${hotdealLoadFailed ? '핫딜 상품을 불러오지 못했어요. 잠시 후 새로고침해주세요.' : '핫딜 상품 불러오는 중...'}</div>`;
@@ -597,6 +615,33 @@ function renderMain() {
           <h3 class="hotdeal-section-title">${cat}</h3>
           <div class="hotdeal-grid">${groups[cat].map(renderCard).join('')}</div>
         </div>`).join('')}
+      `;
+    } else {
+      // commerce best products (링크프라이스 잘팔리는 상품 popularProducts API, 지마켓 한정 아님)
+      const items = data.commerce.bestproducts;
+      if (!items.length) {
+        main.innerHTML = `<div class="empty-note">${bestLoadFailed ? '베스트 상품을 불러오지 못했어요. 잠시 후 새로고침해주세요.' : '베스트 상품 불러오는 중...'}</div>`;
+        return;
+      }
+      const sorted = [...items].sort((a,b) => (b.sales_count||0) - (a.sales_count||0));
+      const renderCard = p => `
+        <a class="hotdeal-card" href="${p.click_url || '#'}" target="_blank" rel="noopener sponsored">
+          <div class="hotdeal-img">${p.image_link ? `<img src="${p.image_link}" alt="${p.title}">` : '🛍️'}</div>
+          <div class="hotdeal-info">
+            <div class="hotdeal-merchant">${p.merchant_id || ''}</div>
+            <div class="hotdeal-name">${p.title}</div>
+            <div class="hotdeal-price-row">
+              ${p.discount_rate ? `<span class="hotdeal-discount">${Math.round(p.discount_rate)}%</span>` : ''}
+              <span class="hotdeal-sale">${p.sale_price ? Number(p.sale_price).toLocaleString() + '원' : '-'}</span>
+              ${p.price && p.sale_price && p.price !== p.sale_price ? `<span class="hotdeal-orig">${Number(p.price).toLocaleString()}원</span>` : ''}
+            </div>
+          </div>
+        </a>`;
+      main.innerHTML = `
+        <div style="background:var(--color-commerce-soft);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
+          💡 링크프라이스 "잘팔리는 상품" API 기준이에요 (지마켓 한정 아님). 판매수 높은 순으로 정렬했어요.
+        </div>
+        <div class="hotdeal-grid">${sorted.map(renderCard).join('')}</div>
       `;
     }
   } else if (currentCat === 'card') {
