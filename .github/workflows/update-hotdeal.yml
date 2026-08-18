@@ -2,8 +2,9 @@ name: 핫딜 상품 데이터 자동 갱신
 
 on:
   schedule:
+    # 매일 한국시간 새벽 4시 (UTC 19시)에 자동 실행
     - cron: '0 19 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch: {}  # 저장소 화면에서 수동으로도 실행 가능
 
 jobs:
   update:
@@ -15,16 +16,53 @@ jobs:
       - name: 링크프라이스 지마켓 TOP100 상품 API 호출
         run: |
           curl -sSL "https://ep.linkprice.com/top100-products/merchant/gmarket/affiliate/${{ secrets.LINKPRICE_AFFILIATE_ID }}" \
-            -o data/hotdeal.json.new
+            -o data/top100.json
 
-      - name: 응답이 정상적인 JSON 배열인지 확인
+      - name: 링크프라이스 지마켓 베스트상품 API 호출
         run: |
-          if ! python3 -c "import json,sys; d=json.load(open('data/hotdeal.json.new')); assert isinstance(d, list) and len(d) > 0"; then
-            echo "API 응답이 비정상적이라 갱신을 건너뜁니다."
-            rm -f data/hotdeal.json.new
-            exit 0
-          fi
-          mv data/hotdeal.json.new data/hotdeal.json
+          curl -sSL "https://ep.linkprice.com/best-products/merchant/gmarket/affiliate/${{ secrets.LINKPRICE_AFFILIATE_ID }}" \
+            -o data/best.json
+
+      - name: 링크프라이스 할인상품(popularProducts) API 호출
+        run: |
+          curl -sSL -X POST \
+            -d "discount=Y&page=1&per_page=50" \
+            "https://api.linkprice.com/popularProducts/affiliateId/${{ secrets.LINKPRICE_AFFILIATE_ID }}" \
+            -o data/discount.json
+
+      - name: 세 API 결과를 중복 제거해서 합치기
+        run: |
+          python3 << 'EOF'
+          import json
+
+          def load_list(path):
+              try:
+                  with open(path) as f:
+                      d = json.load(f)
+                  return d if isinstance(d, list) else []
+              except Exception:
+                  return []
+
+          top100 = load_list('data/top100.json')
+          best = load_list('data/best.json')
+          discount = load_list('data/discount.json')
+
+          merged = {}
+          for item in top100 + best + discount:
+              code = item.get('product_code')
+              if code:
+                  merged[code] = item
+
+          result = list(merged.values())
+
+          if not result:
+              print("세 API 모두 유효한 데이터가 없어 갱신을 건너뜁니다.")
+          else:
+              with open('data/hotdeal.json', 'w', encoding='utf-8') as f:
+                  json.dump(result, f, ensure_ascii=False, indent=2)
+              print(f"총 {len(result)}개 상품으로 갱신했습니다. (top100:{len(top100)}, best:{len(best)}, discount:{len(discount)})")
+          EOF
+          rm -f data/top100.json data/best.json data/discount.json
 
       - name: 변경사항 커밋 및 푸시
         run: |
