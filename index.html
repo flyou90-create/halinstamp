@@ -607,8 +607,11 @@ function renderMain() {
         const filteredCards = issuer.cards.filter(c => (c.type || '신용카드') === wantType);
         main.innerHTML = `
           <div class="brand-detail-header"><span class="brand-icon-lg">${issuer.logo ? `<img src="${issuer.logo}" alt="${issuer.name}">` : issuer.icon}</span><h2>${issuer.name} · ${wantType}</h2></div>
-          <div style="background:var(--color-card-soft);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
-            💡 <strong>대부분의 카드에 공통으로 적용되는 전월실적 제외 항목</strong>이 있어요!<br>국세·지방세·관세 등 공과금, 전기·도시가스요금·아파트관리비, 초중고교 납입금·대학등록금, 4대보험료, 고속도로 통행료·하이패스, 상품권 구매, 단기/장기카드대출(현금서비스·카드론), 연회비·이자. 카드별 세부 제외 항목은 각 상품설명서를 확인하세요.
+          <div style="background:var(--color-card-soft);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.9;">
+            💡 <strong>대부분의 카드에 공통으로 적용되는 전월실적 제외 항목</strong>이 있어요!<br>
+            국세·지방세·관세 등 공과금, 전기·도시가스요금·아파트관리비, 초중고교 납입금·대학등록금, 4대보험료<br>
+            고속도로 통행료·하이패스, 상품권 구매, 단기/장기카드대출(현금서비스·카드론), 연회비·이자<br>
+            카드별 세부 제외 항목은 각 상품설명서를 확인하세요.
           </div>
           ${filteredCards.length ? `<div class="card-list">${filteredCards.map(c => `
             <div class="item-card" data-cat="card">
