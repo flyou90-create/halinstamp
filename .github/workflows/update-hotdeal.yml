@@ -1,0 +1,36 @@
+yaml
+name: 핫딜 상품 데이터 자동 갱신
+
+on:
+  schedule:
+    - cron: '0 19 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: 링크프라이스 지마켓 TOP100 상품 API 호출
+        run: |
+          curl -sSL "https://ep.linkprice.com/top100-products/merchant/gmarket/affiliate/${{ secrets.LINKPRICE_AFFILIATE_ID }}" \
+            -o data/hotdeal.json.new
+
+      - name: 응답이 정상적인 JSON 배열인지 확인
+        run: |
+          if ! python3 -c "import json,sys; d=json.load(open('data/hotdeal.json.new')); assert isinstance(d, list) and len(d) > 0"; then
+            echo "API 응답이 비정상적이라 갱신을 건너뜁니다."
+            rm -f data/hotdeal.json.new
+            exit 0
+          fi
+          mv data/hotdeal.json.new data/hotdeal.json
+
+      - name: 변경사항 커밋 및 푸시
+        run: |
+          git config user.name "hotdeal-bot"
+          git config user.email "actions@github.com"
+          git add data/hotdeal.json
+          git diff --cached --quiet || git commit -m "핫딜 상품 데이터 자동 갱신 $(date +'%Y-%m-%d')"
+          git push
