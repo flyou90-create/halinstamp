@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>할인스탬프 — 오늘도 확인한 할인코드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<style>
+  :root{
+    --color-bg: #E7F1FB;
+    --color-sea-deep: #1B6FA8;
+    --color-sea-mid: #4E9DD6;
+    --color-sun: #FFC857;
+    --color-surface: #FFFFFF;
+    --color-ink: #1B2340;
+    --color-ink-soft: #545B75;
+    --color-ink-faint: #9298AC;
+    --color-stamp: #C0392B;
+    --color-stamp-soft: #FBEAE7;
+    --color-line: #E4E4E2;
+    --color-travel: #2C6E8C;   --color-travel-soft: #E2EEF2;
+    --color-commerce: #B8752F; --color-commerce-soft: #F5E9D9;
+    --color-card: #6B5B95;     --color-card-soft: #ECE8F5;
+    --color-guide: #3F8863;    --color-guide-soft: #E3F0E9;
+    --font-body: 'Pretendard', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-body); background: var(--color-bg); color: var(--color-ink); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  header.site { position: relative; overflow: hidden; }
+  .ocean-hero-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden; z-index: 0; pointer-events: none;
+  }
+  .ocean-hero-bg svg { width: 100%; height: 100%; display: block; }
+  .logo, .tagline { position: relative; z-index: 1; }
+
+  header.site { max-width: 1080px; margin: 0 auto; padding: 40px 24px 34px; min-height: 150px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 21px; letter-spacing: -0.02em; cursor: pointer; text-shadow: 0 1px 6px rgba(255,255,255,0.9), 0 0px 2px rgba(255,255,255,0.9); }
+  .logo .badge { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 8px; background: var(--color-stamp); color: #fff; font-family: var(--font-mono); font-size: 13px; font-weight: 700; transform: rotate(-6deg); }
+  .tagline { font-size: 13px; color: var(--color-ink-faint); font-weight: 500; text-shadow: 0 1px 6px rgba(255,255,255,0.9), 0 0px 2px rgba(255,255,255,0.9); }
+
+  .cat-toggle { max-width: 1080px; margin: 6px auto 10px; padding: 0 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .cat-btn { font-family: var(--font-body); font-weight: 700; font-size: 14px; padding: 9px 16px; border-radius: 999px; border: 1.5px solid var(--color-line); background: var(--color-surface); color: var(--color-ink-faint); cursor: pointer; transition: all .2s ease; }
+  .cat-btn.active[data-cat="home"]     { background: var(--color-ink);      border-color: var(--color-ink);      color: #fff; }
+  .cat-btn.active[data-cat="travel"]   { background: var(--color-travel);   border-color: var(--color-travel);   color: #fff; }
+  .cat-btn.active[data-cat="commerce"] { background: var(--color-commerce); border-color: var(--color-commerce); color: #fff; }
+  .cat-btn.active[data-cat="card"]     { background: var(--color-card);     border-color: var(--color-card);     color: #fff; }
+  .cat-btn.active[data-cat="guide"]    { background: var(--color-guide);    border-color: var(--color-guide);    color: #fff; }
+
+  .view-toggle { max-width: 1080px; margin: 16px auto 22px; padding: 0 24px; display: flex; gap: 4px; border-bottom: 1.5px solid var(--color-line); min-height: 20px; }
+  .view-btn { font-family: var(--font-body); font-weight: 600; font-size: 13.5px; padding: 9px 4px; margin-right: 20px; border: none; background: none; cursor: pointer; color: var(--color-ink-faint); border-bottom: 2.5px solid transparent; margin-bottom: -1.5px; }
+  .view-btn.active { color: var(--color-ink); border-bottom-color: currentColor; }
+
+  main { max-width: 1080px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ---------- Home ---------- */
+  .home-hero { padding: 8px 0 28px; }
+  .home-hero h1 { font-size: clamp(24px, 3.6vw, 32px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.35; max-width: 600px; text-shadow: 0 1px 10px rgba(255,255,255,0.85), 0 1px 3px rgba(255,255,255,0.9); }
+  .home-hero p { margin-top: 10px; font-size: 14px; color: var(--color-ink-soft); max-width: 480px; text-shadow: 0 1px 8px rgba(255,255,255,0.9), 0 1px 2px rgba(255,255,255,0.9); }
+
+  .home-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 36px; align-items: stretch; }
+  @media (max-width: 720px) { .home-tiles { grid-template-columns: repeat(2, 1fr); } }
+  .home-tile { border-radius: 16px; padding: 22px 18px; cursor: pointer; border: none; text-align: left; transition: transform .15s ease; }
+  .home-tile:hover { transform: translateY(-2px); }
+  .home-tile .tile-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+  .home-tile .tile-name { font-weight: 800; font-size: 15px; margin-bottom: 3px; display: block; }
+  .home-tile .tile-count { font-size: 12px; opacity: .85; display: block; }
+  .home-tile[data-cat="travel"]   { background: var(--color-travel-soft);   color: var(--color-travel);   border: 1.5px solid var(--color-travel);   box-shadow: 0 3px 10px -5px rgba(44,110,140,0.35); }
+  .home-tile[data-cat="commerce"] { background: var(--color-commerce-soft); color: var(--color-commerce); border: 1.5px solid var(--color-commerce); box-shadow: 0 3px 10px -5px rgba(184,117,47,0.35); }
+  .home-tile[data-cat="card"]     { background: var(--color-card-soft);     color: var(--color-card);     border: 1.5px solid var(--color-card);     box-shadow: 0 3px 10px -5px rgba(107,91,149,0.35); }
+  .home-tile[data-cat="guide"]    { background: var(--color-guide-soft);    color: var(--color-guide);    border: 1.5px solid var(--color-guide);    box-shadow: 0 3px 10px -5px rgba(63,136,99,0.35); }
+
+  .home-section-title { font-size: 13px; font-weight: 700; color: var(--color-ink-faint); letter-spacing: 0.03em; margin-bottom: 12px; }
+
+  /* ---------- Brand grid ---------- */
+  .brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; align-items: stretch; }
+  .brand-card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 14px; padding: 12px 16px; cursor: pointer; text-align: left; transition: transform .15s ease, box-shadow .15s ease; display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .brand-card:hover { transform: translateY(-2px); box-shadow: 0 8px 18px -10px rgba(27,35,64,0.18); }
+  .brand-card .brand-logo-box { width: 68px; height: 56px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .brand-card .brand-logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .brand-card .brand-logo-box .emoji-fallback { font-size: 36px; line-height: 1; }
+  .brand-card .brand-info { min-width: 0; }
+  .brand-card .brand-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .brand-card .brand-count { font-size: 11.5px; color: var(--color-ink-faint); }
+  .brand-card .brand-best { font-size: 11.5px; font-weight: 700; margin-top: 6px; padding: 2px 8px; border-radius: 5px; display: inline-block; }
+  .brand-card[data-cat="travel"] .brand-best   { background: var(--color-travel-soft);   color: var(--color-travel); }
+  .brand-card[data-cat="commerce"] .brand-best { background: var(--color-commerce-soft); color: var(--color-commerce); }
+
+  /* ---------- Back / breadcrumb ---------- */
+  .back-row { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .home-nav-row { max-width: 1080px; margin: 0 auto 4px; padding: 0 24px; }
+  .back-btn { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--color-ink-soft); background: var(--color-surface); border: 1.5px solid var(--color-line); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+  .back-btn:hover { color: var(--color-ink); }
+  .brand-detail-header { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .brand-detail-header .brand-icon-lg { font-size: 26px; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 12px; background: var(--color-surface); border: 1px solid var(--color-line); flex-shrink: 0; }
+  .brand-detail-header .brand-icon-lg img { max-width: 76%; max-height: 60%; object-fit: contain; }
+  .brand-detail-header h2 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; }
+
+  /* ---------- Ticket card ---------- */
+  .ticket-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .ticket-grid { grid-template-columns: 1fr; } }
+  .ticket { background: var(--color-surface); border-radius: 14px; border: 1px solid var(--color-line); display: flex; position: relative; overflow: hidden; }
+  .ticket-main { flex: 1; padding: 18px 16px; }
+  .ticket-stub { width: 92px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 2px dashed var(--color-line); padding: 12px 8px; text-align: center; }
+  .ticket-stub .stub-label { font-size: 10px; color: var(--color-ink-faint); font-weight: 700; margin-bottom: 4px; }
+  .ticket-stub .stub-btn { font-family: var(--font-body); font-size: 12px; font-weight: 700; color: #fff; border: none; padding: 8px 10px; border-radius: 8px; cursor: pointer; line-height: 1.3; }
+  .ticket[data-cat="travel"] .stub-btn { background: var(--color-travel); }
+  .ticket[data-cat="commerce"] .stub-btn { background: var(--color-commerce); }
+  .ticket-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .platform-tag { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 6px; }
+  .ticket[data-cat="travel"] .platform-tag { background: var(--color-travel-soft); color: var(--color-travel); }
+  .ticket[data-cat="commerce"] .platform-tag { background: var(--color-commerce-soft); color: var(--color-commerce); }
+  .stamp { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--color-stamp); border: 1.5px solid var(--color-stamp); border-radius: 5px; padding: 2px 7px; transform: rotate(-5deg); white-space: nowrap; }
+  .code-row { font-family: var(--font-mono); font-size: 18px; font-weight: 700; background: var(--color-bg); border-radius: 8px; padding: 8px 12px; margin-bottom: 8px; display: inline-block; }
+  .ticket-desc { font-size: 13px; color: var(--color-ink-soft); line-height: 1.5; }
+
+  .card-list { display: flex; flex-direction: column; gap: 14px; }
+  .hotdeal-section { margin-bottom: 30px; }
+  .hotdeal-section-title { font-size: 15px; font-weight: 800; margin-bottom: 12px; padding-left: 10px; border-left: 4px solid var(--color-commerce); }
+  .hotdeal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+  .hotdeal-card { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: transform .15s ease, box-shadow .15s ease; }
+  .hotdeal-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(27,35,64,0.2); }
+  .hotdeal-img { width: 100%; aspect-ratio: 1/1; background: var(--color-bg); display: flex; align-items: center; justify-content: center; font-size: 32px; }
+  .hotdeal-img img { width: 100%; height: 100%; object-fit: cover; }
+  .hotdeal-info { padding: 12px; }
+  .hotdeal-merchant { font-size: 10.5px; font-weight: 700; color: var(--color-commerce); margin-bottom: 3px; }
+  .hotdeal-name { font-size: 13px; font-weight: 600; line-height: 1.4; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.6em; }
+  .hotdeal-price-row { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+  .hotdeal-discount { font-size: 13px; font-weight: 800; color: var(--color-stamp); }
+  .hotdeal-sale { font-size: 14px; font-weight: 800; }
+  .hotdeal-orig { font-size: 11px; color: var(--color-ink-faint); text-decoration: line-through; }
+  .item-card { background: var(--color-surface); border-radius: 14px; border: 1px solid var(--color-line); padding: 18px 20px; display: flex; align-items: center; gap: 16px; }
+  .item-thumb { width: 60px; height: 60px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+  .item-card[data-cat="travel"]   .item-thumb { background: var(--color-travel-soft); }
+  .item-card[data-cat="commerce"] .item-thumb { background: var(--color-commerce-soft); }
+  .item-card[data-cat="card"]     .item-thumb { background: var(--color-card-soft); }
+  .item-card[data-cat="guide"]    .item-thumb { background: var(--color-guide-soft); }
+  .item-card[data-cat="card"] { align-items: flex-start; padding: 22px; gap: 22px; }
+  .item-card[data-cat="card"] .item-thumb { width: 148px; height: 148px; background: #fff; border: 1px solid var(--color-line); box-shadow: 0 8px 20px -10px rgba(27,35,64,0.25); padding: 10px; }
+  .item-card[data-cat="card"] .item-title { font-size: 17px; margin-top: 2px; }
+  .item-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .item-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 5px; }
+  .item-card[data-cat="travel"]   .item-tag { background: var(--color-travel-soft);   color: var(--color-travel); }
+  .item-card[data-cat="commerce"] .item-tag { background: var(--color-commerce-soft); color: var(--color-commerce); }
+  .item-card[data-cat="card"]     .item-tag { background: var(--color-card-soft);     color: var(--color-card); }
+  .item-card[data-cat="guide"]    .item-tag { background: var(--color-guide-soft);    color: var(--color-guide); }
+  .item-date { font-size: 11.5px; color: var(--color-ink-faint); }
+  .item-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.01em; }
+  .item-excerpt { font-size: 13px; color: var(--color-ink-soft); }
+  .item-card[data-cat="card"] .item-meta { margin-bottom: 6px; }
+  .item-card[data-cat="card"] .item-excerpt { line-height: 1.55; }
+
+  .tag-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .tag-chip { font-size: 12.5px; font-weight: 600; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--color-line); background: var(--color-surface); color: var(--color-ink-soft); cursor: pointer; }
+  .tag-chip.active { background: var(--color-card); border-color: var(--color-card); color: #fff; }
+
+  .empty-note { font-size: 13px; color: var(--color-ink-faint); text-align: center; padding: 40px 0; border: 1.5px dashed var(--color-line); border-radius: 12px; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 0 24px 48px; font-size: 12px; color: var(--color-ink-faint); border-top: 1px solid var(--color-line); padding-top: 20px; }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="ocean-hero-bg">
+    <svg viewBox="0 0 1080 150" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FDF6E3"/>
+          <stop offset="100%" stop-color="#EAF2FB"/>
+        </linearGradient>
+        <linearGradient id="seaGrad1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#7FB8E8"/>
+          <stop offset="100%" stop-color="#4E9DD6"/>
+        </linearGradient>
+        <linearGradient id="seaGrad2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#3B85C2"/>
+          <stop offset="100%" stop-color="#1B6FA8"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1080" height="150" fill="url(#skyGrad)"/>
+      <circle cx="1000" cy="32" r="20" fill="#FFC857" opacity="0.85"/>
+      <!-- gulls, centered between logo and tagline -->
+      <path d="M495,26 Q502,19 509,26 Q516,19 523,26" stroke="#26332F" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M530,44 Q535,39 540,44 Q545,39 550,44" stroke="#26332F" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.4"/>
+      <!-- waves fill the lower half of the header -->
+      <path d="M0,102 Q90,84 180,102 T360,102 T540,102 T720,102 T900,102 T1080,102 V150 H0 Z" fill="url(#seaGrad1)" opacity="0.5"/>
+      <path d="M0,118 Q100,100 200,118 T400,118 T600,118 T800,118 T1000,118 T1080,118 V150 H0 Z" fill="url(#seaGrad1)" opacity="0.75"/>
+      <path d="M0,134 Q120,118 240,134 T480,134 T720,134 T960,134 T1080,134 V150 H0 Z" fill="url(#seaGrad2)"/>
+      <!-- surfer, riding the mid wave crest, clear of logo & tagline -->
+      <g transform="translate(640,110) rotate(-7) scale(1.4)">
+        <ellipse cx="0" cy="9" rx="19" ry="4" fill="#1B6FA8" opacity="0.95"/>
+        <circle cx="1.5" cy="-9.5" r="3.4" fill="#26332F"/>
+        <path d="M1.5,-6.5 L-1.5,3 M1.5,-6.5 L7,-0.5 M1.5,-6.5 L-4,-1.5 M-1.5,3 L-6,10 M-1.5,3 L4,9.5" stroke="#26332F" stroke-width="1.9" stroke-linecap="round" fill="none"/>
+      </g>
+    </svg>
+  </div>
+  <div class="logo" id="logoHome"><span class="badge">✓</span>할인스탬프</div>
+  <div class="tagline">매달 확인하고 도장 찍은, 진짜 할인코드만</div>
+</header>
+
+<div class="cat-toggle" id="catToggle">
+  <button class="cat-btn active" data-cat="home">🏠 홈</button>
+  <button class="cat-btn" data-cat="travel">✈️ 여행 쿠폰</button>
+  <button class="cat-btn" data-cat="commerce">🛍 쇼핑 할인코드</button>
+  <button class="cat-btn" data-cat="card">💳 카드 혜택</button>
+  <button class="cat-btn" data-cat="guide">💡 꿀팁가이드</button>
+</div>
+
+<div class="view-toggle" id="viewToggle"></div>
+<div class="home-nav-row" id="homeNav" style="display:none;">
+  <button class="back-btn" id="homeNavBtn">← 이전 페이지</button>
+</div>
+<main id="main"></main>
+
+<footer>
+  할인스탬프 프로토타입 · 예시/실제 프로모션 데이터 혼합입니다 · 일부 링크는 제휴 링크이며 구매/예약 시 수수료를 받을 수 있습니다
+</footer>
+
+<script>
+const catConfig = {
+  home:     { label:'🏠 홈', views:[] },
+  travel:   { label:'✈️ 여행 쿠폰', views:[{key:'brands',label:'브랜드별'},{key:'blog',label:'후기 & 비교'}] },
+  commerce: { label:'🛍 쇼핑 할인코드', views:[{key:'brands',label:'브랜드별'},{key:'hotdeal',label:'핫딜 상품'}] },
+  card:     { label:'💳 카드 혜택', views:[{key:'credit',label:'신용카드'},{key:'check',label:'체크카드'},{key:'bytag',label:'혜택 유형별'}] },
+  guide:    { label:'💡 꿀팁가이드', views:[{key:'list',label:'전체 글'}] },
+};
+
+const data = {
+  travel: {
+    brands: [
+      { platform:'아고다', icon:'🏨', img:'http://img.linkprice.com/files/glink/agoda/20191122/5dd79f9315f7b_120_60.jpg', codes:[
+        { code:'NEW14AGD1', desc:'신규 고객 전 지역 14% 할인 (최대 $100)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=agoda&a=A100681208&l=0000' },
+        { code:'LPAGDKR10', desc:'국내 지역 5% 할인코드', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=agoda&a=A100681208&l=0000' },
+      ]},
+      { platform:'에어알로', icon:'📶', img:'https://img.linkprice.com/files/glink/airalo/20230406/e00xVgcWzw680_120_60.png', codes:[
+        { code:'AIRKR15', desc:'전 고객 15% 할인 (다회 사용 가능, eSIM)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=airalo&a=A100681208&l=0000' },
+      ]},
+      { platform:'트립닷컴', icon:'✈️', img:'https://img.linkprice.com/files/glink/ctrip/20220404/000E2JnWW4000_ctriplogo(120x60).png', codes:[
+        { code:'LPF3', desc:'항공권 3% 할인 (최대 12,000원)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=ctrip&a=A100681208&l=0000' },
+      ]},
+      { platform:'익스피디아', icon:'🧳', img:'https://img.linkprice.com/files/glink/expedia/20230427/BCsOXoZPjbCNl_120x60.png', codes:[
+        { code:'EXP5', desc:'전지역 숙소 5% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=expedia&a=A100681208&l=0000' },
+      ]},
+      { platform:'호텔스닷컴', icon:'🛎️', img:'https://img.linkprice.com/files/glink/hotelskr/20260311/c0LmJVVbzOG1a_120x60_HCOM_NewLogo.jpg', codes:[
+        { code:'SUMMER20', desc:'전지역 숙소 20% 할인 (최대 5만원)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=hotelskr&a=A100681208&l=9999&l_cd1=3&l_cd2=0&tu=https%3A%2F%2Fkr.hotels.com%2Flp%2Fb%2Fsummer26lp' },
+        { code:'LP005', desc:'전지역 숙소 5% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=hotelskr&a=A100681208&l=0000' },
+      ]},
+      { platform:'kkday', icon:'🎫', img:'http://img.linkprice.com/files/glink/kkday/20190611/5cff03c239308_120_60.jpg', codes:[
+        { code:'KKSUMMER6K', desc:'10만원 이상 구매 시 6천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=kkday&a=A100681208&l=0000' },
+        { code:'KKSUMMER3K', desc:'5만원 이상 구매 시 3천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=kkday&a=A100681208&l=0000' },
+        { code:'LINKPR260830K', desc:'40만원 이상 구매 시 3만원 할인 (링크프라이스 전용)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=kkday&a=A100681208&l=0000' },
+        { code:'LINKPR26087K', desc:'10만원 이상 구매 시 7천원 할인 (링크프라이스 전용)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=kkday&a=A100681208&l=0000' },
+      ]},
+      { platform:'클룩', icon:'🎡', img:'https://img.linkprice.com/files/glink/klook/20221221/0000000000000_%ED%81%B4%EB%A3%A9%EB%B0%B0%EB%84%88.png', codes:[
+        { code:'클룩할인7000', desc:'20만원 이상 구매 시 7천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=klook&a=A100681208&l=0000' },
+        { code:'클룩할인3000', desc:'10만원 이상 구매 시 3천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=klook&a=A100681208&l=0000' },
+        { code:'클룩할인2000', desc:'5만원 이상 구매 시 2천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=klook&a=A100681208&l=0000' },
+      ]},
+      { platform:'마이리얼트립', icon:'🗺️', img:'https://img.linkprice.com/files/glink/myrealtrip/20260108/695f037b56f0f_120x60.png', codes:[
+        { code:'LINKPRICE6000', desc:'해외 투어·티켓 20만원 이상 6천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=myrealtrip&a=A100681208&l=0000' },
+        { code:'LINKPRICE3000', desc:'해외 투어·티켓 15만원 이상 3천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=myrealtrip&a=A100681208&l=0000' },
+        { code:'LINKPRICE2000', desc:'해외 투어·티켓 5만원 이상 2천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=myrealtrip&a=A100681208&l=0000' },
+        { code:'LINKPRICESTAY3000', desc:'해외 숙소 15만원 이상 3천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=myrealtrip&a=A100681208&l=0000' },
+        { code:'LINKPRICESTAY1000', desc:'해외 숙소 5만원 이상 1천원 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=myrealtrip&a=A100681208&l=0000' },
+      ]},
+      { platform:'트래블로카', icon:'🛫', img:'https://img.linkprice.com/files/glink/traveloka/20251028/0000000000000_logo.png', codes:[
+        { code:'LKPHT', desc:'호텔 예약 5% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=traveloka&a=A100681208&l=0000' },
+        { code:'LKPFLY', desc:'해외 항공 1% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=traveloka&a=A100681208&l=0000' },
+      ]},
+      { platform:'유심사', icon:'📶', img:'https://img.linkprice.com/files/glink/usimsa/20250415/67fe1b8610f28_120x60.jpg', codes:[
+        { code:'LPPROS26', desc:'전상품 18% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=usimsa&a=A100681208&l=0000' },
+      ]},
+    ],
+    blog: [
+      { title:'오사카 3박4일, 아고다 vs 야놀자 실제 가격 비교해봤어요', excerpt:'같은 호텔, 같은 날짜 기준으로 직접 비교한 후기', tag:'가격비교', date:'8월 2주차' },
+      { title:'하나카드로 아고다 예약하니 진짜 더 쌌던 이유', excerpt:'카드사 제휴 할인 실제 적용 후기', tag:'카드할인', date:'8월 1주차' },
+    ]
+  },
+  commerce: {
+    brands: [
+      { platform:'찰스앤키스', icon:'👜', img:'https://img.linkprice.com/files/glink/charlesnk/20240709/000tfoPf60000_logo%20charles%20%26%20keith%20120x60.png', codes:[
+        { code:'WELCOME10AP', desc:'전 제품 10% 할인 (신규 고객 전용)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=charlesnk&a=A100681208&l=0000' },
+      ]},
+      { platform:'클럽클리오', icon:'💄', img:'https://img.linkprice.com/files/glink/clubclio/20230306/cxQw95q8z2fKq_120x60.jpg', codes:[
+        { code:'cliocode', desc:'특정 품목 최대 43% 할인 (최대 3만원)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=clubclio&a=A100681208&l=0000' },
+      ]},
+      { platform:'대상웰라이프', icon:'🥤', img:'https://img.linkprice.com/files/glink/dswellife/20260107/695df8842479c_120x60.jpg', codes:[
+        { code:'WL2026', desc:'1만원 이상 구매 시 7% 할인 (최대 3만원)', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=dswellife&a=A100681208&l=0000' },
+      ]},
+      { platform:'조마샵', icon:'⌚', img:'https://img.linkprice.com/files/glink/jomashop/20230426/0000000000000_10695180.png', codes:[
+        { code:'20LPJOMAFS20', desc:'$500 이상 구매 시 $20 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=jomashop&a=A100681208&l=0000' },
+        { code:'20LPJOMAFS50', desc:'$1200 이상 구매 시 $50 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=jomashop&a=A100681208&l=0000' },
+        { code:'20LPJOMAFS', desc:'무료 배송 코드', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=jomashop&a=A100681208&l=0000' },
+      ]},
+      { platform:'레노버', icon:'💻', img:'http://img.linkprice.com/files/glink/lenovo/20180403/5ac2c78b83471_120_60.jpg', codes:[
+        { code:'LVLINKPRICE', desc:'온라인스토어 할인가 기준 추가 3% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=lenovo&a=A100681208&l=0000' },
+      ]},
+      { platform:'리퍼연구소', icon:'🔌', img:'https://img.linkprice.com/files/glink/refurlab/20260416/000kv1Zys0000_%EB%A6%AC%ED%8D%BC%EC%97%B0%EA%B5%AC%EC%86%8C%20%EB%A1%9C%EA%B3%A0%20(3).png', codes:[
+        { code:'리퍼연구소123', desc:'전제품 2만원 할인쿠폰', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=refurlab&a=A100681208&l=0000' },
+      ]},
+      { platform:'셔터스톡', icon:'🖼️', img:'http://img.linkprice.com/files/glink/shutter/20150827/55decffb8f41d_120_60.jpg', codes:[
+        { code:'LP10', desc:'이미지·영상 전제품 10% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=shutter&a=A100681208&l=0000' },
+      ]},
+      { platform:'슈마커', icon:'👟', img:'https://img.linkprice.com/files/glink/smk/20260713/000787mCOu000_%EC%8A%88%EB%A7%88%EC%BB%A4%EB%A1%9C%EA%B3%A0%28120x60%29.png', codes:[
+        { code:'SHOEMAKERADIDAS', desc:'아디다스 15% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=smk&a=A100681208&l=0000' },
+        { code:'SHOEMARKERCROCS', desc:'크록스 15% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=smk&a=A100681208&l=0000' },
+        { code:'SHOEMARKERPOLO', desc:'폴로랄프로렌 17% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=smk&a=A100681208&l=0000' },
+      ]},
+      { platform:'스냅스', icon:'📸', img:'https://img.linkprice.com/files/glink/snaps/20260519/000ZjHe8u0000_%EC%8A%A4%EB%83%85%EC%8A%A4-%EB%A1%9C%EA%B3%A0-%EA%B0%80%EB%A1%9C-120-60.jpg', codes:[
+        { code:'B0578B70-BD8A-422B', desc:'포토북 전상품 48% 할인', checked:'8월 확인됨', url:'https://bestmore.net/click.php?m=snaps&a=A100681208&l=0000' },
+      ]},
+    ],
+    hotdeal: [] // 실행 시 data/hotdeal.json을 fetch해서 채워짐 (아래 loadHotdeal 함수)
+  },
+  card: {
+    issuers: [
+      { name:'현대카드', icon:'💳', cards:[
+        { name:'현대카드 T', img:'https://d1c5n4ri2guedi.cloudfront.net/card/2882/card_img/49417/2882card.png', desc:'국내 가맹점 0.7% 청구할인, 해외 온·오프라인 가맹점 2% 청구할인, 국제브랜드·해외서비스 수수료 100% 청구할인', fee:'국내전용 1.5만원 / 해외겸용 1.5만원', requirement:'실적 조건 없음', brand:'VISA', benefits:['[기본] 실적·한도 제한 없이 국내 가맹점 0.7% 청구할인','[해외] 실적·한도 제한 없이 해외 온·오프라인 가맹점 2% 청구할인','[수수료] 해외 가맹점 국제브랜드 수수료 + 해외서비스 수수료 100% 청구할인','[플레이트] 메탈 소재 제공'], link:'https://m.card-gorilla.com/card/detail/2882', linkLabel:'카드고릴라에서 보기', type:'신용카드', tags:['해외결제할인','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_2_1f7d83e511.png', name:'현대카드 ZERO Edition3(포인트형)', desc:'전월실적 없이 국내외 가맹점 1.2% M포인트 적립 (한도 없음)', fee:'1.5만원', requirement:'실적 조건 없음', type:'신용카드', benefits:['[적립] 국내외 전 가맹점 1.2% M포인트 적립, 실적·한도 없음'], link:'https://www.banksalad.com/product/cards/CARD004284', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_2_1f7d83e511.png', name:'현대카드 ZERO Edition3(할인형)', desc:'전월실적 없이 국내외 가맹점 0.8% 청구할인 (한도 없음)', fee:'1.5만원', requirement:'실적 조건 없음', type:'신용카드', benefits:['[할인] 국내외 전 가맹점 0.8% 청구할인, 실적·한도 없음'], link:'https://www.banksalad.com/product/cards/CARD004293', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_2_81abc9cf27.png', name:'현대카드M', desc:'국내외 가맹점 1.5% 적립, M긴급적립 최대 50만, 100만원 이상 이용 시 온라인쇼핑·음식점·해외 5% 적립', fee:'3만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[적립] 국내외 가맹점 1.5% M포인트 적립 (전월실적 50만원↑)','[긴급적립] 최대 50만 포인트 무이자 선지급, 최대 24개월 상환','[추가적립] 전월실적 100만원↑ 시 온라인쇼핑몰·음식점·해외가맹점 5% 적립 (월 1만P 한도)'], link:'https://www.banksalad.com/product/cards/CARD004305', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_2_81abc9cf27.png', name:'현대카드MM', desc:'국내외 가맹점 1.5% 적립, 100만원 이상 시 온라인쇼핑·음식점·해외 10% 적립, 인천공항 라운지·발렛파킹 무료', fee:'7만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[적립] 국내외 가맹점 1.5% M포인트 적립','[긴급적립] 최대 50만 포인트 무이자 선지급','[추가적립] 전월실적 100만원↑ 시 온라인쇼핑몰·음식점·해외 10% 적립 (월 2만P 한도)','[공항] 인천공항 라운지·발렛파킹 연 2회 무료'], link:'https://www.banksalad.com/product/cards/CARD004306', linkLabel:'뱅크샐러드에서 보기', tags:['공항라운지','여행','온라인쇼핑'] },
+        { img:'https://financialshopping-cdn.banksalad.com/X_e5f0c348ec.png', name:'현대카드X', desc:'국내외 가맹점 1% 적립(한도 없음), X긴급적립 최대 50만, 인천공항 라운지 무료(연 2회), 500만원당 2만원 캐시백', fee:'5만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[적립] 국내외 전 가맹점 1% 적립 (한도 없음)','[긴급적립] 최대 50만 포인트 무이자 선지급','[공항라운지] 인천공항 스카이허브·마티나 라운지 무료 (연 2회)','[캐시백] 연간 누적 500만원당 2만원 캐시백'], link:'https://www.banksalad.com/product/cards/CARD004307', linkLabel:'뱅크샐러드에서 보기', tags:['공항라운지','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_3_4420aec2cc.png', name:'현대카드Z work Edition2', desc:'온라인쇼핑 10% + 대중교통·커피전문점·편의점·도서·택시 10% 할인, 직장인 출퇴근 특화', fee:'2만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[공통] 온라인쇼핑 10% 할인','[직장인] 대중교통·커피전문점·편의점·도서·택시 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD004297', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_3_4420aec2cc.png', name:'현대카드Z family Edition2', desc:'온라인쇼핑 10% + 교육·의료·주유·생활요금 10% 할인, 가족 단위 생활비 특화', fee:'2만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[공통] 온라인쇼핑 10% 할인 (네이버쇼핑·쿠팡 등)','[가족] 교육·의료·주유·관리비·통신비 등 생활요금 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD004296', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_3_4420aec2cc.png', name:'현대카드Z Play', desc:'온라인쇼핑 10% + 영화·음식점·디지털콘텐츠·해외가맹점 10% 할인, 문화생활 특화', fee:'2만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[공통] 온라인쇼핑 10% 할인','[문화] 영화·음식점·디지털콘텐츠(넷플릭스 등)·해외가맹점 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD004298', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','해외결제할인'] },
+      ]},
+      { name:'신한카드', icon:'💳', cards:[
+        { name:'SOL트래블 체크카드', img:'https://d1c5n4ri2guedi.cloudfront.net/storage/card/2667/card_img/32473/2660card.png', desc:'해외 이용 수수료 면제, 더라운지 공항라운지 본인 무료 입장, 해외 대중교통 1% 결제일 할인, 국내 4대 편의점 5% 할인', fee:'연회비 없음', requirement:'라운지는 전월실적 30만원 이상 (그 외 실적 조건 없음)', brand:'Mastercard', benefits:['[해외이용] 해외 이용금액 현지통화 결제 서비스','[수수료] 국제브랜드 수수료(1%)·해외서비스 수수료(0.2%) 면제','[공항라운지] 더라운지 본인 무료 입장 (전월실적 30만원 이상)','[해외] 대중교통 컨택리스 결제 시 1% 결제일 할인','[국내] 4대 편의점 5%, 대중교통 1% 결제일 할인'], link:'https://m.card-gorilla.com/card/detail/2667', linkLabel:'카드고릴라에서 보기', type:'체크카드', tags:['해외결제할인','공항라운지','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Globus_8e6d2e989c.png', name:'신한 Globus', desc:'해외 가맹점 1.7% 포인트 적립(한도 없음), 해외 수수료(1.18%) 전액 할인, 국내 가맹점 0.7% 적립', fee:'국내전용 2.2만원 / 해외겸용 2.5만원', requirement:'전월실적 30만원 이상', brand:'해외겸용', benefits:['[해외] 가맹점 이용금액 1.7% 포인트 적립 (한도 없음)','[수수료] 국제브랜드 수수료 1% + 해외서비스 수수료 0.18%, 전액 할인','[국내] 가맹점 0.7% 포인트 적립'], link:'https://www.banksalad.com/product/cards/CARD004316', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['해외결제할인','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Mr_Life_379d3cd577.png', name:'신한카드 Mr.Life', desc:'공과금(전기·가스·통신) 10% 할인, 편의점·온라인쇼핑·택시 심야 10% 할인, 대형마트·주유 주말 할인', fee:'1.5만원~', requirement:'전월실적 30만원 이상', brand:'해외겸용', benefits:['[공과금] 전기요금·가스비·통신비 10% 할인','[편의점] CU·GS25 등 10% 할인 (일 1회)','[온라인쇼핑] 쿠팡·11번가·G마켓 등 오후9시~오전9시 10% 할인','[택시] 오후9시~오전9시 10% 할인','[대형마트] 주말 10% 할인, [주유] 주말 리터당 60원 할인'], link:'https://www.banksalad.com/product/cards/CARD000004', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_6e1437c001.png', name:'신한카드 처음(ANNIVERSE)', desc:'음식점·카페·편의점·온라인쇼핑 등 일상 전영역 5% 적립, 통신비 10%, OTT 15%, 멤버십(쿠팡와우 등) 20% 적립', fee:'1.5만원~', requirement:'전월실적 30만원 이상', brand:'해외겸용', benefits:['[일상] 음식점·카페·편의점·온라인쇼핑·생활·여행·패션 5% 적립','[통신비] SKT·KT·LGU+ 10% 적립','[OTT] 넷플릭스·유튜브프리미엄·티빙 등 15% 적립','[멤버십] 쿠팡와우·네이버플러스 20% 적립'], link:'https://www.banksalad.com/product/cards/CARD004343', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_f13dc7125c.png', name:'신한카드 B.Big(삑)', desc:'버스·지하철·택시·KTX 10% 할인, 4대 백화점 5%, 카페 10%, 통신·영화 할인까지 교통 특화', fee:'1만원', requirement:'전월실적 30만원 이상', brand:'해외겸용', benefits:['[대중교통] 실적 구간별 일 200~600원 할인','[택시·KTX] 10% 할인','[쇼핑] 롯데·현대·신세계·갤러리아 백화점 5%','[커피] 스타벅스·커피빈 등 10%','[통신] 5% 할인, [영화] CGV·메가박스 할인'], link:'https://www.banksalad.com/product/cards/CARD000117', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_7a6de9c000.png', name:'신한카드 Deep Oil', desc:'주유·정비소·주차장 10% 할인, 편의점 5%, 실적 제외 항목이 적어 실적 채우기 쉬운 카드', fee:'1만원', requirement:'전월실적 30만원 이상', brand:'해외겸용', benefits:['[주유] GS칼텍스·SK에너지 등 10% 할인','[정비소] 스피드메이트 10% 할인, [주차장] 전국 주차장','[편의점] GS25·CU 5% 할인','[카페·택시·영화] 롯데시네마 등 추가 할인'], link:'https://www.banksalad.com/product/cards/CARD000118', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Discount_Plan_3329aa9043.png', name:'신한카드 Discount Plan+', desc:'낮엔 카페·음식점, 밤엔 편의점·배달앱 10% 할인, 공과금·디지털구독·멤버십 20% 할인까지 시간대별 자동 적용', fee:'국내전용 5만원 / 해외겸용 5만원', requirement:'전월실적 40만원 이상', brand:'해외겸용', benefits:['[시간대] 낮 카페·음식점 / 밤 편의점·배달앱 10% 할인','[쇼핑·이동·생활] 쇼핑 10%, 교통·생활 5% 할인','[고정비] 공과금 자동납부 10% 할인','[구독·멤버십] 디지털 구독·멤버십 20% 할인'], link:'https://www.banksalad.com/product/cards/CARD004442', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Card_Plate_Image_Template_4_c9cf282635.png', name:'신한카드 S-Line 체크', desc:'11시~14시 요식업종 5% 할인, 전 가맹점 포인트 적립, 교통(버스·지하철 5%) 또는 주유(리터당 40원) 중 선택', fee:'연회비 없음', requirement:'전월실적 30만원 이상', type:'체크카드', benefits:['[점심 외식] 11~14시 요식업종 5% 할인 (월 최대 1만원)','[전 가맹점] 이용금액 포인트 적립 (한도 없음)','[교통] 후불교통 선택 시 버스·지하철 5% 할인 (월 최대 1만원)','[주유] 후불교통 미선택 시 리터당 40원 할인 (월 최대 1만원)'], link:'https://www.banksalad.com/articles/2023-%ED%98%9C%ED%83%9D-%EC%A2%8B%EC%9D%80-%EC%B2%B4%ED%81%AC%EC%B9%B4%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%88%9C%EC%9C%84-TOP5', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+      ]},
+      { name:'삼성카드', icon:'💳', cards:[
+        { name:'THE iD. 1st', img:'https://d1c5n4ri2guedi.cloudfront.net/card/2915/card_img/45262/2915card_1.png', desc:'백화점·여행·온라인쇼핑·골프·병원 5대 영역 연 최대 15만원 할인 기프트, 국내외 1~3% 빅포인트 적립, 공항라운지 연 3회 무료(동반인 포함)', fee:'국내전용 15만원 / 해외겸용 15만원', requirement:'전월실적 50만원 이상', brand:'Mastercard', benefits:['[프리미엄] 백화점·여행(해외/항공/호텔)·온라인쇼핑몰·골프·병원 5대 영역, 건당 5만원 이상 결제 시 5만원 할인 (연 최대 3회, 총 15만원)','[적립] 국내외 가맹점 1~3% 빅포인트 적립 (한도 제한 없음)','[공항라운지] The Lounge 연 3회 무료 (동반인 포함 가능)','[프리미엄서비스] 해외겸용카드 국제브랜드 서비스'], link:'https://www.card-gorilla.com/card/detail/2915', linkLabel:'카드고릴라에서 보기', type:'신용카드', tags:['공항라운지','여행','프리미엄'] },
+        { img:'https://financialshopping-cdn.banksalad.com/i_D_GLOBAL_52465d15f5.png', name:'삼성 iD GLOBAL 카드', desc:'해외 온·오프라인·해외직구 2% 결제일 할인, 해외 수수료(1.2%) 전액 결제일 할인, 삼성페이 해외 오프라인 5% 할인, 디지털콘텐츠 50% 할인', fee:'국내전용 2만원 / 해외겸용(Mastercard) 2만원', requirement:'전월실적 50만원 이상', brand:'Mastercard', benefits:['[해외] 가맹점·해외직구 2% 결제일 할인 (통합 월 한도 30만원)','[수수료] 국제브랜드 1.0% + 해외이용 0.2%, 총 1.2% 결제일 할인 (실적·한도 없음)','[삼성페이] 해외 오프라인 결제 시 5% 추가 할인 (월 1~2만원 한도)','[콘텐츠] 넷플릭스·디즈니+·유튜브프리미엄·쿠팡와우·네이버플러스 50% 할인'], link:'https://www.banksalad.com/product/cards/CARD004312', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['해외결제할인','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/i_D_ON_c11560e325.png', name:'삼성 iD ON 카드', desc:'매달 가장 많이 쓴 카페·배달·디저트 영역 30% 할인, 교통·통신·스트리밍 10%, 온라인간편결제·해외 1~3% 할인', fee:'1만원', requirement:'전월실적 30만원 이상', type:'신용카드', benefits:['[자동선택] 카페·배달·디저트 중 최다 소비 영역 30% 할인','[고정비] 교통·통신·스트리밍 10% 할인','[온라인·해외] 간편결제·해외결제 1~3% 할인'], link:'https://www.banksalad.com/product/cards/CARD000101', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/taptap_DIGITAL_1_d6ef275b7c.png', name:'삼성 taptap DIGITAL', desc:'OTT 스트리밍 50% 할인, 온라인 간편결제 5%, 해외결제 실적 조건 없이 월 50만원 한도 할인', fee:'1만원', requirement:'전월실적 30만원 이상', type:'신용카드', benefits:['[스트리밍] 넷플릭스 등 OTT 50% 할인','[온라인] 간편결제 5% 할인','[해외] 해외직구 포함 결제, 실적 조건 없이 월 50만원 한도 할인'], link:'https://www.banksalad.com/product/cards/CARD000168', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','해외결제할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/taptap_DRIVE_ade2b43789.png', name:'삼성 taptap DRIVE', desc:'주유 리터당 60~150원 할인, 온라인쇼핑몰·간편결제 10% 무제한 할인(실적 조건 없음)', fee:'1만원', requirement:'전월실적 30만원 이상', type:'신용카드', benefits:['[주유] 리터당 60~150원 할인 (월 1.5만원 한도)','[온라인] 쇼핑몰·간편결제 10% 할인, 무실적·무제한','[생활] 카페·편의점 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD000171', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/i_D_MOVE_df0a880ba6.png', name:'삼성 iD MOVE 카드', desc:'해외·항공·철도 1.5% 할인, 대중교통·택시 10%, 통신·스트리밍 10%, 카페·편의점 10%', fee:'2만원', requirement:'전월실적 40만원 이상', type:'신용카드', benefits:['[교통] 해외·항공·철도 1.5% 할인 (월 통합 50만원 한도, 실적 무관)','[대중교통·택시] 10% 할인','[통신·스트리밍·카페·편의점] 각 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD000169', linkLabel:'뱅크샐러드에서 보기', tags:['해외결제할인','여행','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/and_MILEAGE_PLATINUM_1d49831c97.png', name:'삼성카드 & MILEAGE PLATINUM(스카이패스)', desc:'전월실적 없이 국내외 전 가맹점 1,000원당 1마일 적립, 특별 옵션 선택 시 1,000원당 2마일', fee:'국내전용 4.7만원 / AMEX 4.9만원', requirement:'실적 조건 없음', type:'신용카드', benefits:['[기본] 국내외 전 가맹점 1,000원당 1마일리지 적립 (한도 없음)','[특별] 국내(백화점·커피·편의점·택시·주유) 또는 해외 옵션 선택 시 1,000원당 2마일 (월 2,000마일 한도)'], tags:['마일리지','여행'] },
+      ]},
+      { name:'하나카드', icon:'💳', cards:[
+        { name:'JADE Classic', img:'https://d1c5n4ri2guedi.cloudfront.net/card/2657/card_img/32434/2657card.png', desc:'바우처 10만원 상당 제공(5종 중 택1), 전세계 공항라운지 연 3회 무료(동반인 포함), 국내외 가맹점 1% 하나머니 적립', fee:'국내전용 11.5만원 / 해외겸용 12만원', requirement:'전월실적 50만원 이상', brand:'VISA / Mastercard', benefits:['[바우처] 5가지 중 1가지 선택 이용 (연 1회, 서비스 실적 조건 있음)','[공항라운지] 전세계 공항라운지 무료 이용 (연 3회, 일 3회, 동반인 포함 가능)','[적립] 국내외 가맹점 1% 하나머니 적립','[적립] 영역별 1.2~1.5% 하나머니 적립 (전월실적·한도 조건)','[생활] 디지털 콘텐츠·커피·택시 각 50% 하나머니 적립 (전월실적·한도 조건)'], link:'https://m.card-gorilla.com/card/detail/2657', linkLabel:'카드고릴라에서 보기', type:'신용카드', tags:['공항라운지','여행','프리미엄'] },
+        { name:'트래블로그 신용카드', img:'https://d1c5n4ri2guedi.cloudfront.net/storage/card/2529/card_img/29020/2529card.png', desc:'국내외 가맹점 1% 적립, 해외 가맹점 3% 적립(월 5만 한도), 항공·면세점·여행 3% 적립(월 5만 한도)', fee:'국내전용 2만원 / 해외겸용 2만원', requirement:'실적 조건 없음', brand:'Mastercard', benefits:['[국내외] 가맹점 1.0% 하나머니 적립','[간편결제] 1.0~1.3% 하나머니 적립','[해외] 가맹점 3% 하나머니 적립 (신용카드 결제 시, 월 5만 하나머니 한도)','[여행] 항공권·면세점·온라인여행사 각 3% 적립 (월 5만 하나머니 한도)','[기타] 외화 하나머니 결제 지원, 카드 플레이트 선택 가능'], link:'https://m.card-gorilla.com/card/detail/2529', linkLabel:'카드고릴라에서 보기', type:'신용카드', tags:['해외결제할인','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Co_brand_YOUNG_30bfd1ec88.png', name:'하나 원더카드 YOUNG', desc:'딜리버리·편의점·대중교통·온라인패션 10% 할인, 영상 스트리밍(넷플릭스·디즈니+ 등) 70% 할인', fee:'19,900원', requirement:'전월실적 40만원 이상', brand:'해외겸용', benefits:['[딜리버리] 배민·요기요·쿠팡이츠 10% 할인','[편의점·대중교통·온라인패션] 각 10% 할인','[영상 스트리밍] 넷플릭스·디즈니+·웨이브·유튜브프리미엄 70% 할인'], link:'https://www.banksalad.com/product/cards/CARD004529', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/2_0_LIFE_94f05404f9.png', name:'하나 원더카드2.0 LIFE', desc:'생활요금(아파트관리비·전기·가스) 10%, 커피 10%, 영상 스트리밍 40% 할인, 자취생·직장인 특화', fee:'19,900원', requirement:'전월실적 40만원 이상', brand:'해외겸용', benefits:['[생활요금] 아파트관리비·전기세·가스비 10% 할인','[커피] 스타벅스·투썸플레이스 10% 할인','[영상 스트리밍] 40% 할인, [딜리버리·대중교통·편의점] 각 10% 할인'], link:'https://www.banksalad.com/product/cards/CARD004527', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Jade_Prime_22c0adf348.png', name:'하나 JADE Prime', desc:'프리미엄 바우처 최대 20만원, 공항라운지 연 6회·일 3회 무료, 해외·항공·면세 3% 하나머니 적립', fee:'국내전용 29.5만원 / 해외겸용 30만원', requirement:'전월실적 50만원 이상', brand:'해외겸용', benefits:['[바우처] 프리미엄 바우처 최대 20만원 (JADE Classic의 2배)','[공항라운지] 연 6회, 일 3회 무료 이용','[적립] 국내외 가맹점 1.5% 하나머니 적립','[특별적립] 해외·항공·면세 3% 하나머니 적립'], link:'https://www.banksalad.com/product/cards/CARD004321', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['공항라운지','여행','프리미엄'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_a441a20c6c.png', name:'하나 스카이패스 아멕스 플래티늄', desc:'전월실적 없이 국내 1천원당 1마일, 해외 1천원당 2마일 적립(한도 없음), 인천공항 라운지 무료(월1회)', fee:'국내외겸용(AMEX) 4.5만원', requirement:'실적 조건 없음 (라운지는 전월실적 50만원)', brand:'AMEX', benefits:['[적립] 국내 1,000원당 1마일, 해외 1,000원당 2마일 (한도 없음)','[공항라운지] 인천공항 라운지 무료 (월 1회, 연 2회, 전월실적 50만원 이상)','[실적] 기본 적립 자체는 전월실적 조건 없음'], link:'https://www.banksalad.com/product/cards/CARD004256', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['마일리지','공항라운지','여행'] },
+      ]},
+      { name:'우리카드', icon:'💳', cards:[
+        { name:'카드의정석 EVERY MILE SKYPASS', img:'https://d1c5n4ri2guedi.cloudfront.net/card/2553/card_img/36834/2553card.png', desc:'SKYPASS 최대 2마일리지 적립, 해외이용수수료 0.3% 면제, 국내 공항라운지 동반 1인 동시 이용', fee:'국내전용 3.9만원 / 해외겸용 3.9만원', requirement:'라운지는 전월실적 50만원 이상 (그 외 실적 조건 없음)', brand:'Mastercard', benefits:['[적립] 대한항공 SKYPASS 최대 2마일리지 적립 (국내 1천원당 1마일, 해외 1천원당 2마일)','[수수료] 국제브랜드 수수료(1%) + 해외이용 수수료(0.3%) 면제','[공항라운지] 국내 공항라운지 동반 1인 동시 이용 (전월실적 50만원 이상)'], link:'https://m.card-gorilla.com/card/detail/2553', linkLabel:'카드고릴라에서 보기', type:'신용카드', tags:['공항라운지','여행','마일리지'] },
+      ]},
+      { name:'국민카드', icon:'💳', cards:[
+        { name:'WE:SH Travel카드', desc:'해외 이용 환율우대 100%, 해외 이용수수료 1.25% 면제, 공항라운지 연 2회 무료, KB Pay 결제 시 온라인쇼핑·커피·편의점·영화관 10% 할인', fee:'카드사 확인 필요', requirement:'카드사 확인 필요', type:'신용카드', tags:['해외결제할인','공항라운지','여행'] },
+        { name:'트래블러스 체크카드', desc:'해외 이용 수수료 1.25% 면제, 환율 우대(KB Pay 외화머니 100%), 철도 5천원·전국맛집 5천원 할인', fee:'카드사 확인 필요', requirement:'수수료 면제·환율우대는 실적 조건 없음, 일부 할인은 전월실적 20만원', type:'체크카드', tags:['해외결제할인','여행'] },
+        { name:'아메리칸 익스프레스 블루', desc:'온라인쇼핑 10%, 이동통신 자동납부 10%, OTT 30%, 편의점 5%, 아웃백 30%, 해외 가맹점 5% 할인', fee:'국내외겸용(Amex) 1.9만원 (모바일단독 1.3만원)', requirement:'카드사 확인 필요', type:'신용카드', tags:['온라인쇼핑','생활할인'] },
+        { name:'스카이패스 티타늄', desc:'국내 1,000원당 1마일, 해외·면세점 1,000원당 2마일 적립, 공항라운지 연 2회 무료, 발렛파킹 서비스', fee:'카드사 확인 필요', requirement:'카드사 확인 필요', type:'신용카드', tags:['마일리지','공항라운지','여행'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_1cb69752d3.png', name:'국민 마이위시(MY WE:SH)', desc:'음식점·편의점·간편결제·이동통신 10% 할인, 스트리밍 30% 할인, 배달/카페/택시/영화관/미용실 등 택1 추가할인', fee:'9,000원~', requirement:'전월실적 40만원 이상', type:'신용카드', benefits:['[간편결제·음식·편의점·이동통신] 각 10% 할인','[스트리밍] 넷플릭스 등 30% 할인','[택1] 배달·카페 / 택시·카페·영화관 / 미용실·스포츠·서점·올리브영 중 선택 추가할인'], link:'https://www.banksalad.com/product/cards/CARD000128', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/KB_6a6e2d9891.png', name:'국민 청춘대로 톡톡카드', desc:'스타벅스 50% 청구할인, 버거/패스트푸드 20%, 간편결제 10%, 대중교통·택시·통신 10% 할인', fee:'4,000원~', requirement:'전월실적 30만원 이상', type:'신용카드', benefits:['[스타벅스] 50% 청구할인 (월 1만원 한도)','[버거·패스트푸드] 20% 청구할인','[간편결제] 10% 청구할인 (중복 적용 가능)','[대중교통·택시·통신] 10% 청구할인'], link:'https://www.banksalad.com/product/cards/CARD000021', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/KB_Easy_Pick_66467bd779.png', name:'KB국민 Easy Pick카드', desc:'인터넷쇼핑몰·배달앱·대형마트·주유·대중교통·간편결제 5% 적립, Pick 서비스로 원하는 영역 추가 선택', fee:'14,000원~', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[기본] 인터넷쇼핑몰·배달앱·대형마트·주유·대중교통·간편결제 각 5% 적립','[Pick 서비스] 백화점·홈쇼핑·커피·온라인서점·차량정비 중 1개 선택 5% 추가 적립'], link:'https://www.banksalad.com/product/cards/CARD000134', linkLabel:'뱅크샐러드에서 보기', tags:['온라인쇼핑','생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/KB_2_KB_Pay_a2bd3c764a.png', name:'KB국민 노리2 체크카드(KB Pay)', desc:'커피·모바일·문화 10%, 에버랜드·롯데월드 15,000원 할인, KB Pay 온·오프라인 2% 할인', fee:'연회비 없음', requirement:'전월실적 20만원 이상', type:'체크카드', benefits:['[일상] 커피·모바일·문화 10% 할인, 뷰티·편의점 5% 할인','[놀이공원] 에버랜드·롯데월드 15,000원 할인','[구독·배달] 각 1,000원 할인, [이동통신] 2,500원 할인, [영화] 4,000원 할인','[KB Pay] 오프라인 2%, 온라인 2% 할인'], link:'https://www.banksalad.com/articles/2023-%ED%98%9C%ED%83%9D-%EC%A2%8B%EC%9D%80-%EC%B2%B4%ED%81%AC%EC%B9%B4%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%88%9C%EC%9C%84-TOP5', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/_f4a8feba0b.png', name:'KB국민 토심이 첵첵 체크카드', desc:'카페·뷰티·편의점·영화·서점·간편결제·쇼핑 등 9개 영역 1,000~2,000원 할인, 네이버페이·카카오페이 할인', fee:'연회비 없음', requirement:'전월실적 30만원 이상', type:'체크카드', benefits:['[일상 9개 영역] 카페·뷰티·편의점·영화·서점·간편결제·문화·쇼핑 각 1,000~2,000원 할인','[간편결제] 네이버페이·카카오페이 등 결제 시 할인'], link:'https://www.banksalad.com/articles/2023-%ED%98%9C%ED%83%9D-%EC%A2%8B%EC%9D%80-%EC%B2%B4%ED%81%AC%EC%B9%B4%EB%93%9C-%EC%B6%94%EC%B2%9C-%EC%88%9C%EC%9C%84-TOP5', linkLabel:'뱅크샐러드에서 보기', tags:['생활할인'] },
+      ]},
+      { name:'롯데카드', icon:'💳', cards:[
+        { img:'https://financialshopping-cdn.banksalad.com/London_37bf440821.png', name:'디지로카 London', desc:'전월실적 무관 국내 모든 가맹점 0.7% 캐시백, 즉시결제·Weekly결제 이용 시 최대 1.7% 피킹율', fee:'카드사 확인 필요', requirement:'실적 조건 없음 (즉시/Weekly결제는 조건 별도)', type:'신용카드', tags:['생활할인'] },
+        { name:'디지로카 Paris', desc:'전월실적·한도 무관 국내외 모든 가맹점 0.7% 할인', fee:'카드사 확인 필요', requirement:'실적 조건 없음', type:'신용카드', tags:['생활할인','해외결제할인'] },
+        { name:'디지로카 Travel', desc:'전월실적 없이 무제한 트래블마일 적립, 적립한 마일 현금처럼 사용 가능', fee:'카드사 확인 필요', requirement:'실적 조건 없음', type:'신용카드', tags:['여행','마일리지'] },
+        { img:'https://financialshopping-cdn.banksalad.com/LOCA_365_8cb45919a7.png', name:'LOCA 365', desc:'아파트관리비·공과금·통신·보험·배달앱·스트리밍 등 생활 고정비 10% 할인, 월 최대 36,500원', fee:'국내전용 2만원 / 해외겸용 2만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[고정비] 아파트관리비·전기·도시가스·통신·보험료 자동납부 10% 할인','[생활] 대중교통·학습지·배달앱 10% 할인','[스트리밍] 넷플릭스 등 정기결제 1,500원 정액 할인 (월 1회)'], tags:['생활할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/LOCA_LIKIT_1_2_49e1db33b8.png', name:'LOCA LIKIT 1.2', desc:'전월실적 없이 국내외 전 가맹점 1.2% 무제한 캐시백, 온라인 결제 시 1.5%', fee:'국내전용 1.5만원 / 해외겸용 1.8만원', requirement:'실적 조건 없음', type:'신용카드', benefits:['[전체] 국내외 모든 가맹점 1.2% 결제일 할인 (한도 없음)','[온라인] 온라인 결제 시 1.5% 할인 (한도 없음, 오프라인과 중복 안됨)'], tags:['온라인쇼핑','해외결제할인'] },
+        { img:'https://financialshopping-cdn.banksalad.com/Monaco_79bd64a522.png', name:'디지로카 Monaco', desc:'국내외 전 가맹점 1% 할인, 온라인쇼핑 최대 5%, 배달앱 5%, 통신 5%, 스트리밍 50% 할인', fee:'국내전용·해외겸용 12.5만원', requirement:'전월실적 100만원 이상', type:'신용카드', benefits:['[전체] 국내·해외 모든 가맹점 1% 할인','[온라인쇼핑] 기본 2% + 멤버십 3% 추가 (최대 10만원)','[배달앱] 5% 할인 (최대 5천원), [통신] 5% 할인','[스트리밍] 넷플릭스 등 50% 할인 (최대 5천원)'], tags:['온라인쇼핑','프리미엄'] },
+        { img:'https://financialshopping-cdn.banksalad.com/LOCA_LIKIT_c077e6e421.png', name:'LOCA LIKIT', desc:'스타벅스 최대 60% 할인, 영화 50%, 대중교통·통신 10%, 배달앱 5% 할인', fee:'국내전용·해외겸용 1만원', requirement:'전월실적 50만원 이상', type:'신용카드', benefits:['[카페] 스타벅스 50~60% 할인 (삼성페이 등 간편결제 시 60%)','[영화] CGV·롯데시네마 50% 할인','[대중교통·통신] 10% 할인, [배달앱] 배민·쿠팡이츠 5% 할인'], tags:['생활할인'] },
+      ]},
+      { name:'BC카드', icon:'💳', cards:[
+        { img:'https://financialshopping-cdn.banksalad.com/BC_MACAO_2ae5a8ea07.png', name:'BC 바로 MACAO 카드', desc:'해외 전 가맹점 2% 결제일 할인(실적·한도 없음), 주유·장보기·온라인쇼핑 최대 10% 할인', fee:'국내전용 1.2만원 / 해외겸용(MASTER) 1.2만원', requirement:'전월실적 30만원 이상', brand:'Mastercard', benefits:['[해외] 전 가맹점 2% 결제일 할인 (전월실적·할인한도 없음)','[주유] 결제금액별 최대 10% 할인 (3만원 미만 3%~7만원 이상 10%)','[장보기] 결제금액별 최대 10% 할인','[온라인쇼핑] 장보기 가맹점과 동일한 할인율 적용'], link:'https://www.banksalad.com/product/cards/CARD004337', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['해외결제할인','생활할인'] },
+      ]},
+      { name:'NH카드', icon:'💳', cards:[
+        { img:'https://financialshopping-cdn.banksalad.com/NH_zgm_25bd283668.png', name:'NH농협카드 zgm.휴가중', desc:'해외 이용액 2~5% 포인트 적립(실적 조건 없음), 호텔스닷컴 20% 즉시할인, 공항라운지 무료, 여행자보험 무료가입', fee:'국내전용 2.5만원 / 국내외겸용(MASTER) 2.5만원', requirement:'실적 조건 없음', brand:'Mastercard', benefits:['[해외] 이용액 2~5% 포인트 적립 (월 최대 10만 포인트)','[항공권·면세점] 0.5% 포인트 적립 (월 최대 1만 포인트)','[숙박] 호텔스닷컴 전용 페이지 예약 시 20% 즉시할인 (월 최대 4회)','[공항라운지] 전세계 라운지 무료 이용 (월 1회, 연 2회)','[보험] 여행자보험 무료 가입 (본인 회원)','[국내] 이용액 0.5% 포인트 적립'], link:'https://www.banksalad.com/articles/2023-%ED%95%B4%EC%99%B8%EA%B2%B0%EC%A0%9C-%EC%B9%B4%EB%93%9C-BEST-3', linkLabel:'뱅크샐러드에서 보기', type:'신용카드', tags:['해외결제할인','공항라운지','여행'] },
+      ]},
+      { name:'토스뱅크', icon:'💳', cards:[
+        { name:'토스뱅크 카드', desc:'실적 조건 없이 매일 즉시 캐시백(커피·편의점·택시·패스트푸드·대중교통 각 300원), 외화통장 연동 시 해외결제 수수료 면제', fee:'연회비 없음', requirement:'실적 조건 없음', brand:'Mastercard', benefits:['[생활] 커피·편의점·택시·패스트푸드·대중교통 5개 영역, 매일 각 300원 즉시 캐시백 (월 최대 46,500원)','[해외] 토스뱅크 외화통장 연동 시 해외결제 수수료 면제','[프로모션] 시즌별 스위치 캐시백 등 한시적 이벤트 다수 (수시 변경)'], type:'체크카드', tags:['생활할인','해외결제할인'] },
+      ]},
+    ]
+  },
+  guide: {
+    list: [
+      { title:'할인코드 안 먹힐 때, 이 5가지부터 확인하세요', excerpt:'쿠폰 적용 실패 시 흔한 원인과 해결법 정리', tag:'문제해결', date:'8월 2주차' },
+      { title:'해외여행 카드 뭘 챙겨야 할까 — 체크리스트', excerpt:'출국 전 카드 혜택 미리 세팅하는 법', tag:'여행준비', date:'8월 1주차' },
+    ]
+  }
+};
+
+let currentCat = 'home';
+let hotdealLoadFailed = false;
+
+// data/hotdeal.json은 GitHub Actions가 매일 자동 갱신함
+async function loadHotdeal() {
+  try {
+    const res = await fetch('./data/hotdeal.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error('fetch failed');
+    const json = await res.json();
+    if (Array.isArray(json) && json.length) {
+      data.commerce.hotdeal = json;
+    }
+  } catch (e) {
+    hotdealLoadFailed = true;
+  }
+  // 지금 핫딜 화면을 보고 있으면 다시 그려줌
+  if (currentCat === 'commerce' && currentView === 'hotdeal') renderMain();
+}
+loadHotdeal();
+let currentView = null;
+let selectedBrand = null; // {cat, platform}
+let selectedIssuer = null;
+let cardTagFilter = null;
+let navStarted = false; // whether we've moved away from the very first home state
+
+function snapshotState() {
+  return { currentCat, currentView, selectedBrand, selectedIssuer, cardTagFilter };
+}
+function applySnapshot(s) {
+  currentCat = s.currentCat;
+  currentView = s.currentView;
+  selectedBrand = s.selectedBrand;
+  selectedIssuer = s.selectedIssuer;
+  cardTagFilter = s.cardTagFilter;
+}
+function syncChromeAndRender() {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === currentCat));
+  document.getElementById('homeNav').style.display = (currentCat === 'home' && !selectedBrand && !selectedIssuer) ? 'none' : 'block';
+  renderViewToggle(true);
+  renderMain();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+// pushHistory: call AFTER mutating state, to record the new state as a fresh browser history entry
+function pushHistory() {
+  navStarted = true;
+  history.pushState(snapshotState(), '');
+}
+// goBack: hand off to the real browser back button (mouse back button works the same way)
+function goBack() {
+  history.back();
+}
+window.addEventListener('popstate', (e) => {
+  if (e.state) {
+    applySnapshot(e.state);
+    syncChromeAndRender();
+  }
+});
+history.replaceState(snapshotState(), '');
+
+function iconFor(platform) {
+  const map = { '하나카드':'💳','신한카드':'💳','삼성카드':'💳','현대카드':'💳' };
+  return map[platform] || '🎫';
+}
+
+function bestBadge(brand) {
+  if (!brand.codes.length) return '코드 준비중';
+  const d = brand.codes[0].desc;
+  const m = d.match(/(\d+%|\$\d[,\d.]*|\d[,\d]*(?:천|만)?원)(?=\s*(?:즉시)?\s*할인)/);
+  return m ? '최대 ' + m[0] + ' 할인' : '혜택 보기';
+}
+
+function renderViewToggle(keepCurrent) {
+  const wrap = document.getElementById('viewToggle');
+  const views = catConfig[currentCat].views;
+  if (!views.length) { wrap.innerHTML = ''; wrap.style.display = 'none'; return; }
+  wrap.style.display = 'flex';
+  const activeKey = keepCurrent && currentView ? currentView : views[0].key;
+  wrap.innerHTML = views.map(v => `<button class="view-btn ${v.key===activeKey?'active':''}" data-view="${v.key}">${v.label}</button>`).join('');
+  wrap.querySelectorAll('.view-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.view === currentView) return;
+      currentView = btn.dataset.view;
+      selectedBrand = null;
+      selectedIssuer = null;
+      document.getElementById('homeNav').style.display = 'block';
+      wrap.querySelectorAll('.view-btn').forEach(b => b.classList.toggle('active', b === btn));
+      pushHistory();
+      renderMain();
+    });
+  });
+  currentView = activeKey;
+}
+
+function renderTicketsForBrand(cat, brand) {
+  if (!brand.codes.length) {
+    return `<div class="empty-note">아직 검증된 할인코드가 없어요. 확인되는 대로 채워드릴게요!</div>`;
+  }
+  return `<div class="ticket-grid">${brand.codes.map(item => `
+    <div class="ticket" data-cat="${cat}">
+      <div class="ticket-main">
+        <div class="ticket-top">
+          <span class="platform-tag">${brand.icon} ${brand.platform}</span>
+          <span class="stamp">✓ ${item.checked}</span>
+        </div>
+        <div class="code-row">${item.code}</div>
+        <div class="ticket-desc">${item.desc}</div>
+      </div>
+      <div class="ticket-stub">
+        <div class="stub-label">CODE</div>
+        <a class="stub-btn" style="text-decoration:none;display:inline-block;text-align:center;${item.url ? '' : 'opacity:.5;pointer-events:none;'}" href="${item.url || '#'}" target="_blank" rel="noopener sponsored">이동<br>하기</a>
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderMain() {
+  const main = document.getElementById('main');
+
+  if (currentCat === 'home') {
+    const travelTop = data.travel.brands.slice(0,4);
+    const commerceTop = data.commerce.brands.slice(0,4);
+    main.innerHTML = `
+      <div class="home-hero">
+        <h1>여행, 쇼핑, 카드 혜택까지<br>오늘 살아있는 정보만 모았어요</h1>
+        <p>매달 정기적으로 직접 확인하고 표시해요. 안 되는 코드로 시간 낭비하지 마세요.</p>
+      </div>
+      <div class="home-tiles">
+        <button class="home-tile" data-cat="travel"><span class="tile-icon">✈️</span><span class="tile-name">여행 쿠폰</span><span class="tile-count">${data.travel.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="commerce"><span class="tile-icon">🛍</span><span class="tile-name">쇼핑 할인코드</span><span class="tile-count">${data.commerce.brands.length}개 브랜드</span></button>
+        <button class="home-tile" data-cat="card"><span class="tile-icon">💳</span><span class="tile-name">카드 혜택</span><span class="tile-count">${data.card.issuers.length}개 카드사</span></button>
+        <button class="home-tile" data-cat="guide"><span class="tile-icon">💡</span><span class="tile-name">꿀팁가이드</span><span class="tile-count">${data.guide.list.length}개 글</span></button>
+      </div>
+      <div class="home-section-title">✈️ 여행 쿠폰 인기 브랜드</div>
+      <div class="brand-grid" id="homeTravelGrid" style="margin-bottom:32px;"></div>
+      <div class="home-section-title">🛍 쇼핑 할인코드 인기 브랜드</div>
+      <div class="brand-grid" id="homeCommerceGrid"></div>
+    `;
+    document.querySelectorAll('.home-tile').forEach(btn => {
+      btn.addEventListener('click', () => selectCat(btn.dataset.cat));
+    });
+    renderBrandGrid('travel', travelTop, document.getElementById('homeTravelGrid'));
+    renderBrandGrid('commerce', commerceTop, document.getElementById('homeCommerceGrid'));
+    return;
+  }
+
+  if (currentCat === 'travel' || currentCat === 'commerce') {
+    if (currentView === 'brands') {
+      if (selectedBrand && selectedBrand.cat === currentCat) {
+        const brand = data[currentCat].brands.find(b => b.platform === selectedBrand.platform);
+        main.innerHTML = `
+          <div class="brand-detail-header"><span class="brand-icon-lg">${brand.img ? `<img src="${brand.img}" alt="${brand.platform}">` : brand.icon}</span><h2>${brand.platform}</h2></div>
+          ${renderTicketsForBrand(currentCat, brand)}
+        `;
+      } else {
+        main.innerHTML = `<div class="brand-grid" id="brandGridMain"></div>`;
+        renderBrandGrid(currentCat, data[currentCat].brands, document.getElementById('brandGridMain'));
+      }
+    } else if (currentCat === 'travel') {
+      const items = data.travel.blog;
+      main.innerHTML = `<div class="card-list">${items.map(item => `
+        <div class="item-card" data-cat="travel">
+          <div class="item-thumb">📝</div>
+          <div>
+            <div class="item-meta"><span class="item-tag">${item.tag}</span><span class="item-date">${item.date}</span></div>
+            <div class="item-title">${item.title}</div>
+            <div class="item-excerpt">${item.excerpt}</div>
+          </div>
+        </div>`).join('')}</div>`;
+    } else {
+      // commerce hotdeal, grouped by category1 (링크프라이스 API 원본 필드명 그대로 사용)
+      const items = data.commerce.hotdeal;
+      if (!items.length) {
+        main.innerHTML = `<div class="empty-note">${hotdealLoadFailed ? '핫딜 상품을 불러오지 못했어요. 잠시 후 새로고침해주세요.' : '핫딜 상품 불러오는 중...'}</div>`;
+        return;
+      }
+      const groups = {};
+      items.forEach(p => { const k = p.category1 || '기타'; (groups[k] = groups[k] || []).push(p); });
+      const renderCard = p => `
+        <a class="hotdeal-card" href="${p.click_url || '#'}" target="_blank" rel="noopener sponsored">
+          <div class="hotdeal-img">${p.thumbnail_image ? `<img src="${p.thumbnail_image}" alt="${p.title}">` : '🛍️'}</div>
+          <div class="hotdeal-info">
+            <div class="hotdeal-merchant">${p.brand || ''}</div>
+            <div class="hotdeal-name">${p.title}</div>
+            <div class="hotdeal-price-row">
+              ${p.discount_rate ? `<span class="hotdeal-discount">${p.discount_rate}%</span>` : ''}
+              <span class="hotdeal-sale">${p.sale_price ? Number(p.sale_price).toLocaleString() + '원' : '-'}</span>
+              ${p.price && p.sale_price && p.price !== p.sale_price ? `<span class="hotdeal-orig">${Number(p.price).toLocaleString()}원</span>` : ''}
+            </div>
+          </div>
+        </a>`;
+      main.innerHTML = `
+        <div style="background:var(--color-commerce-soft);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
+          💡 링크프라이스 지마켓 상품 API에서 매일 자동으로 최신 데이터를 받아와요. category1 기준으로 묶었어요.
+        </div>
+        ${Object.keys(groups).map(cat => `
+        <div class="hotdeal-section">
+          <h3 class="hotdeal-section-title">${cat}</h3>
+          <div class="hotdeal-grid">${groups[cat].map(renderCard).join('')}</div>
+        </div>`).join('')}
+      `;
+    }
+  } else if (currentCat === 'card') {
+    if (currentView === 'credit' || currentView === 'check') {
+      const wantType = currentView === 'credit' ? '신용카드' : '체크카드';
+      if (selectedIssuer) {
+        const issuer = data.card.issuers.find(i => i.name === selectedIssuer);
+        const filteredCards = issuer.cards.filter(c => (c.type || '신용카드') === wantType);
+        main.innerHTML = `
+          <div class="brand-detail-header"><span class="brand-icon-lg">${issuer.icon}</span><h2>${issuer.name} · ${wantType}</h2></div>
+          <div style="background:var(--color-card-soft);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
+            💡 <strong>대부분의 카드에 공통으로 적용되는 전월실적 제외 항목</strong>이 있어요: 국세·지방세·관세 등 공과금, 전기·도시가스요금·아파트관리비, 초중고교 납입금·대학등록금, 4대보험료, 고속도로 통행료·하이패스, 상품권 구매, 단기/장기카드대출(현금서비스·카드론), 연회비·이자. 카드별 세부 제외 항목은 각 상품설명서를 확인하세요.
+          </div>
+          ${filteredCards.length ? `<div class="card-list">${filteredCards.map(c => `
+            <div class="item-card" data-cat="card">
+              <div class="item-thumb" style="${c.img ? 'background:var(--color-bg);padding:4px;' : 'background:var(--color-card-soft);font-size:56px;'}">${c.img ? `<img src="${c.img}" alt="${c.name}" style="width:100%;height:100%;object-fit:contain;">` : issuer.icon}</div>
+              <div>
+                <div class="item-meta"><span class="item-tag" style="background:var(--color-ink);color:#fff;">${c.type || '신용카드'}</span>${c.tags.map(t => `<span class="item-tag">${t}</span>`).join('')}</div>
+                <div class="item-title">${c.name}</div>
+                <div class="item-excerpt">${c.desc}</div>
+                ${c.benefits ? `<ul style="margin:10px 0 0; padding-left:18px; font-size:12.5px; color:var(--color-ink-soft); line-height:1.7;">${c.benefits.map(b => `<li>${b}</li>`).join('')}</ul>` : ''}
+                <div class="item-excerpt" style="margin-top:8px;color:var(--color-ink-faint);font-size:12px;">연회비 ${c.fee || '카드사 확인 필요'} · 실적조건 ${c.requirement || '카드사 확인 필요'}${c.brand ? ` · 국제브랜드 ${c.brand}` : ''}</div>
+                ${c.link ? `<a href="${c.link}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;color:var(--color-card);text-decoration:none;border-bottom:1.5px solid var(--color-card);">${c.linkLabel || '자세히 보기'} →</a>` : ''}</div>
+
+            </div>`).join('')}</div>` : `<div class="empty-note">이 카드사의 ${wantType}는 아직 정리된 게 없어요. 곧 업데이트할게요!</div>`}
+        `;
+      } else {
+        const issuersWithType = data.card.issuers.filter(iss => iss.cards.some(c => (c.type || '신용카드') === wantType));
+        main.innerHTML = issuersWithType.length ? `<div class="brand-grid" id="cardIssuerGrid"></div>` : `<div class="empty-note">아직 ${wantType}가 등록된 카드사가 없어요.</div>`;
+        if (issuersWithType.length) {
+          const grid = document.getElementById('cardIssuerGrid');
+          grid.innerHTML = issuersWithType.map(iss => {
+            const cnt = iss.cards.filter(c => (c.type || '신용카드') === wantType).length;
+            return `
+            <button class="brand-card" data-cat="card" data-issuer="${iss.name}">
+              <div class="brand-logo-box"><span class="emoji-fallback">${iss.icon}</span></div>
+              <div class="brand-info">
+                <div class="brand-name">${iss.name}</div>
+                <div class="brand-count">${cnt}개 카드</div>
+              </div>
+            </button>
+          `;
+          }).join('');
+          grid.querySelectorAll('.brand-card').forEach(card => {
+            card.addEventListener('click', () => { selectedIssuer = card.dataset.issuer; document.getElementById('homeNav').style.display = 'block'; pushHistory(); renderMain(); });
+          });
+        }
+      }
+    } else {
+      // bytag: flatten all cards across issuers
+      let flat = data.card.issuers.flatMap(iss => iss.cards.map(c => ({...c, issuer: iss.name, icon: iss.icon})));
+      const allTags = [...new Set(flat.flatMap(c => c.tags))];
+      const filterHtml = `<div class="tag-filter">${allTags.map(t => `<button class="tag-chip ${cardTagFilter===t?'active':''}" data-tag="${t}">${t}</button>`).join('')}</div>`;
+      if (cardTagFilter) flat = flat.filter(c => c.tags.includes(cardTagFilter));
+      main.innerHTML = filterHtml + `<div class="card-list">${flat.map(c => `
+        <div class="item-card" data-cat="card">
+          <div class="item-thumb" style="${c.img ? 'background:var(--color-bg);padding:4px;' : 'background:var(--color-card-soft);font-size:56px;'}">${c.img ? `<img src="${c.img}" alt="${c.name}" style="width:100%;height:100%;object-fit:contain;">` : c.icon}</div>
+          <div>
+            <div class="item-meta">${c.type ? `<span class="item-tag" style="background:var(--color-ink);color:#fff;">${c.type}</span>` : ''}${c.tags.map(t => `<span class="item-tag">${t}</span>`).join('')}</div>
+            <div class="item-title">${c.name} <span style="font-weight:500;color:var(--color-ink-faint);font-size:12px;">· ${c.issuer}</span></div>
+            <div class="item-excerpt">${c.desc}</div>
+            ${c.link ? `<a href="${c.link}" target="_blank" rel="noopener" style="display:inline-block;margin-top:6px;font-size:12.5px;font-weight:700;color:var(--color-card);text-decoration:none;border-bottom:1.5px solid var(--color-card);">${c.linkLabel || '자세히 보기'} →</a>` : ''}
+          </div>
+        </div>`).join('')}</div>`;
+      main.querySelectorAll('.tag-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          cardTagFilter = cardTagFilter === chip.dataset.tag ? null : chip.dataset.tag;
+          renderMain();
+        });
+      });
+    }
+  } else if (currentCat === 'guide') {
+    const items = data.guide.list;
+    main.innerHTML = `<div class="card-list">${items.map(item => `
+      <div class="item-card" data-cat="guide">
+        <div class="item-thumb">💡</div>
+        <div>
+          <div class="item-meta"><span class="item-tag">${item.tag}</span><span class="item-date">${item.date}</span></div>
+          <div class="item-title">${item.title}</div>
+          <div class="item-excerpt">${item.excerpt}</div>
+        </div>
+      </div>`).join('')}</div>`;
+  }
+}
+
+function renderBrandGrid(cat, brands, container) {
+  container.innerHTML = brands.map(b => `
+    <button class="brand-card" data-cat="${cat}" data-platform="${b.platform}">
+      <div class="brand-logo-box">${b.img ? `<img src="${b.img}" alt="${b.platform}">` : `<span class="emoji-fallback">${b.icon}</span>`}</div>
+      <div class="brand-info">
+        <div class="brand-name">${b.platform}</div>
+        <div class="brand-count">${b.codes.length ? b.codes.length + '개 코드' : '코드 준비중'}</div>
+        <span class="brand-best">${bestBadge(b)}</span>
+      </div>
+    </button>
+  `).join('');
+  container.querySelectorAll('.brand-card').forEach(card => {
+    card.addEventListener('click', () => {
+      selectCat(card.dataset.cat, { cat: card.dataset.cat, platform: card.dataset.platform });
+      currentView = 'brands';
+    });
+  });
+}
+
+function selectCat(cat, brand) {
+  currentCat = cat;
+  selectedBrand = brand || null;
+  selectedIssuer = null;
+  cardTagFilter = null;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+  document.getElementById('homeNav').style.display = cat === 'home' && !brand ? 'none' : 'block';
+  renderViewToggle();
+  if (brand) currentView = 'brands';
+  pushHistory();
+  renderMain();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+document.getElementById('homeNavBtn').addEventListener('click', goBack);
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => selectCat(btn.dataset.cat));
+});
+document.getElementById('logoHome').addEventListener('click', () => selectCat('home'));
+
+renderViewToggle();
+renderMain();
+</script>
+
+</body>
+</html>
