@@ -438,6 +438,7 @@ let currentView = null;
 let selectedBrand = null; // {cat, platform}
 let selectedIssuer = null;
 let cardTagFilter = null;
+let hotdealCatFilter = null;
 let navStarted = false; // whether we've moved away from the very first home state
 
 function snapshotState() {
@@ -585,14 +586,14 @@ function renderMain() {
           </div>
         </div>`).join('')}</div>`;
     } else if (currentView === 'hotdeal') {
-      // commerce hotdeal, grouped by category1 (지마켓 TOP100/베스트 API 원본 필드명)
+      // commerce hotdeal, category1 기준 칩 필터 (지마켓 TOP100/베스트 API 원본 필드명)
       const items = data.commerce.hotdeal;
       if (!items.length) {
         main.innerHTML = `<div class="empty-note">${hotdealLoadFailed ? '핫딜 상품을 불러오지 못했어요. 잠시 후 새로고침해주세요.' : '핫딜 상품 불러오는 중...'}</div>`;
         return;
       }
-      const groups = {};
-      items.forEach(p => { const k = p.category1 || '기타'; (groups[k] = groups[k] || []).push(p); });
+      const allCats = [...new Set(items.map(p => p.category1 || '기타'))];
+      const filtered = hotdealCatFilter ? items.filter(p => (p.category1 || '기타') === hotdealCatFilter) : items;
       const renderCard = p => `
         <a class="hotdeal-card" href="${p.click_url || '#'}" target="_blank" rel="noopener sponsored">
           <div class="hotdeal-img">${p.thumbnail_image ? `<img src="${p.thumbnail_image}" alt="${p.title}">` : '🛍️'}</div>
@@ -607,15 +608,18 @@ function renderMain() {
           </div>
         </a>`;
       main.innerHTML = `
-        <div style="background:var(--color-commerce-soft);border-radius:12px;padding:14px 16px;margin-bottom:22px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
-          💡 링크프라이스 지마켓 상품 API에서 매일 자동으로 최신 데이터를 받아와요. category1 기준으로 묶었어요.
+        <div style="background:var(--color-commerce-soft);border-radius:12px;padding:14px 16px;margin-bottom:18px;font-size:12.5px;color:var(--color-ink-soft);line-height:1.6;">
+          💡 링크프라이스 지마켓 상품 API에서 매일 자동으로 최신 데이터를 받아와요.
         </div>
-        ${Object.keys(groups).map(cat => `
-        <div class="hotdeal-section">
-          <h3 class="hotdeal-section-title">${cat}</h3>
-          <div class="hotdeal-grid">${groups[cat].map(renderCard).join('')}</div>
-        </div>`).join('')}
+        <div class="tag-filter">${allCats.map(cat => `<button class="tag-chip ${hotdealCatFilter===cat?'active':''}" data-cat1="${cat}">${cat}</button>`).join('')}</div>
+        <div class="hotdeal-grid">${filtered.map(renderCard).join('')}</div>
       `;
+      main.querySelectorAll('.tag-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          hotdealCatFilter = hotdealCatFilter === chip.dataset.cat1 ? null : chip.dataset.cat1;
+          renderMain();
+        });
+      });
     } else {
       // commerce best products (링크프라이스 잘팔리는 상품 popularProducts API, 지마켓 한정 아님)
       const items = data.commerce.bestproducts;
@@ -754,6 +758,7 @@ function selectCat(cat, brand) {
   selectedBrand = brand || null;
   selectedIssuer = null;
   cardTagFilter = null;
+  hotdealCatFilter = null;
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
   document.getElementById('homeNav').style.display = cat === 'home' && !brand ? 'none' : 'block';
   renderViewToggle();
