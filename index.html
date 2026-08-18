@@ -611,7 +611,7 @@ function renderMain() {
           ${filteredCards.length ? `<div class="card-list">${filteredCards.map(c => `
             <div class="item-card" data-cat="card">
               <div class="item-thumb" style="${c.img ? 'background:var(--color-bg);padding:4px;' : 'background:var(--color-card-soft);font-size:56px;'}">${c.img ? `<img src="${c.img}" alt="${c.name}" style="width:100%;height:100%;object-fit:contain;">` : issuer.icon}</div>
-              <div>
+              <div style="flex:1;min-width:0;">
                 <div class="item-meta"><span class="item-tag" style="background:var(--color-ink);color:#fff;">${c.type || '신용카드'}</span>${c.tags.map(t => `<span class="item-tag">${t}</span>`).join('')}</div>
                 <div class="item-title">${c.name}</div>
                 <div class="item-excerpt">${c.desc}</div>
@@ -652,7 +652,7 @@ function renderMain() {
       main.innerHTML = filterHtml + `<div class="card-list">${flat.map(c => `
         <div class="item-card" data-cat="card">
           <div class="item-thumb" style="${c.img ? 'background:var(--color-bg);padding:4px;' : 'background:var(--color-card-soft);font-size:56px;'}">${c.img ? `<img src="${c.img}" alt="${c.name}" style="width:100%;height:100%;object-fit:contain;">` : c.icon}</div>
-          <div>
+          <div style="flex:1;min-width:0;">
             <div class="item-meta">${c.type ? `<span class="item-tag" style="background:var(--color-ink);color:#fff;">${c.type}</span>` : ''}${c.tags.map(t => `<span class="item-tag">${t}</span>`).join('')}</div>
             <div class="item-title">${c.name} <span style="font-weight:500;color:var(--color-ink-faint);font-size:12px;">· ${c.issuer}</span></div>
             <div class="item-excerpt">${c.desc}</div>
