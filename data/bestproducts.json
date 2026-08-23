@@ -1,17 +1,45 @@
 [
   {
     "merchant_id": "gmarket",
-    "product_id": "3728302865",
+    "product_id": "2553244548",
     "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "제스프리 썬 골드키위 자이언트 사이즈 총 3.2kg (21입 개당 150g 내외)",
-    "image_link": "https://gdimg.gmarket.co.kr/3728302865/goodsimage?ver=38172375814",
-    "price": 32600,
-    "sale_price": 24780,
-    "sales_count": 437,
-    "discount_rate": 23,
+    "title": "(신선집중) 신세계푸드 직수입 허니듀멜론 특대과 2개입 (3.4~4.4KG 내외 5수크기)",
+    "image_link": "https://gdimg.gmarket.co.kr/2553244548/goodsimage?ver=38171104564",
+    "price": 21000,
+    "sale_price": 17850,
+    "sales_count": 651,
+    "discount_rate": 15,
     "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D3728302865",
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2553244548",
     "rank": 1
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "3275019919",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "(신선집중) 제스프리 점보 썬골드키위 20입 총 3.1kg내외",
+    "image_link": "https://gdimg.gmarket.co.kr/3275019919/goodsimage?ver=38080721899",
+    "price": 25600,
+    "sale_price": 24070,
+    "sales_count": 581,
+    "discount_rate": 5,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D3275019919",
+    "rank": 2
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "2328663148",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "1+1+1 C to C 60W PD 초고속 충전케이블 3개묶음 이벤트 데이터전송 ok 충전기 단3일 한정수량 초특가",
+    "image_link": "https://gdimg.gmarket.co.kr/2328663148/goodsimage?ver=38178200082",
+    "price": 5000,
+    "sale_price": 4870,
+    "sales_count": 493,
+    "discount_rate": 2,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2328663148",
+    "rank": 3
   },
   {
     "merchant_id": "aliexpress",
@@ -25,21 +53,21 @@
     "discount_rate": 55,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005007039610340.html",
-    "rank": 2
+    "rank": 4
   },
   {
-    "merchant_id": "aliexpress",
-    "product_id": "1005009738330168",
-    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
-    "title": "투키 100W 타입 C 수납식 케이블 아이폰 16 15 프로 맥스 삼성 고속 충전 케이블 미니 사이즈 480Mbps 데이터 케이블",
-    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Sb1cf13705bf94c41b01c70a1bb4ac5b58.png",
-    "price": 16467,
-    "sale_price": 6743,
-    "sales_count": 411,
-    "discount_rate": 59,
-    "commission": 6.3,
-    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009738330168.html",
-    "rank": 3
+    "merchant_id": "gmarket",
+    "product_id": "2214017847",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "(김가네)본사배송 감자탕5kg(9-10인분)/국내산 돈등뼈/실온보관 (라면사리1개+겨자2개 증정)",
+    "image_link": "https://gdimg.gmarket.co.kr/2214017847/goodsimage?ver=38150476703",
+    "price": 20640,
+    "sale_price": 18990,
+    "sales_count": 399,
+    "discount_rate": 7,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2214017847",
+    "rank": 5
   },
   {
     "merchant_id": "aliexpress",
@@ -53,35 +81,21 @@
     "discount_rate": 41,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005008040171122.html",
-    "rank": 4
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "4803663861",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "25년산 특등급 경기미 진품 특등급쌀 10kg 추청",
-    "image_link": "https://gdimg.gmarket.co.kr/4803663861/goodsimage?ver=38154930757",
-    "price": 34800,
-    "sale_price": 29930,
-    "sales_count": 287,
-    "discount_rate": 13,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D4803663861",
-    "rank": 5
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "3658351431",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "신라면 10입 + 너구리 5입 + 짜파게티 5입 (총 20봉)",
-    "image_link": "https://gdimg.gmarket.co.kr/3658351431/goodsimage",
-    "price": 27390,
-    "sale_price": 15080,
-    "sales_count": 284,
-    "discount_rate": 44,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D3658351431",
     "rank": 6
+  },
+  {
+    "merchant_id": "lotteon",
+    "product_id": "LO2460590239",
+    "banner_url": "https://img.linkprice.com/files/glink/lotteon/20260303/0000u00000000_[롯데온]260303_로고/1_120x60.jpg",
+    "title": "[한정수량] 갈아만든 배 저칼로리 340CAN 24개 : 롯데ON",
+    "image_link": "https://contents.lotteon.com/itemimage/20260821121022/LO/24/60/59/02/39/_2/46/05/90/24/0/LO2460590239_2460590240_1.jpg",
+    "price": 16600,
+    "sale_price": 11620,
+    "sales_count": 322,
+    "discount_rate": 30,
+    "commission": 1.4,
+    "click_url": "https://click.linkprice.com/click.php?m=lotteon&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.lotteon.com%2Fp%2Fproduct%2FLO2460590239",
+    "rank": 7
   },
   {
     "merchant_id": "aliexpress",
@@ -95,7 +109,7 @@
     "discount_rate": 0,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012184112237.html",
-    "rank": 7
+    "rank": 8
   },
   {
     "merchant_id": "aliexpress",
@@ -104,12 +118,26 @@
     "title": "베이스어스 인스파이어 XC1 사운드 바이 보스 이어클립 무선 이어버드 블루투스 6.1 오픈형 이어폰 귀걸이형 4-마이크 클립온 이어버드",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Sa1b2821d7e6e4f598f2e216a452dac4dD.jpg",
     "price": 280460,
-    "sale_price": 167145,
+    "sale_price": 167284,
     "sales_count": 253,
     "discount_rate": 40,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005011774262618.html",
-    "rank": 8
+    "rank": 9
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "2106488488",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "한성기업 크래미 몬스터크랩 72g X 20개",
+    "image_link": "https://gdimg.gmarket.co.kr/2106488488/goodsimage?ver=38181969490",
+    "price": 17800,
+    "sale_price": 16380,
+    "sales_count": 242,
+    "discount_rate": 7,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2106488488",
+    "rank": 10
   },
   {
     "merchant_id": "aliexpress",
@@ -123,7 +151,7 @@
     "discount_rate": 53,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010178835114.html",
-    "rank": 9
+    "rank": 11
   },
   {
     "merchant_id": "aliexpress",
@@ -137,7 +165,7 @@
     "discount_rate": 56,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010338145379.html",
-    "rank": 10
+    "rank": 12
   },
   {
     "merchant_id": "aliexpress",
@@ -146,12 +174,40 @@
     "title": "웨스턴 디지털 WD SN850X SSD 1TB 2TB NVMe Gen4 PCIe M.2 2280 PCIe 4.0X4 드라이브 내장형 솔리드 스테이트 디스크 (PS5, 데스크탑, 노트북용)",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S929ab35ea292404bbfc1259acb80d2f12.jpg",
     "price": 737118,
-    "sale_price": 320823,
+    "sale_price": 321193,
     "sales_count": 218,
     "discount_rate": 56,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012869707836.html",
-    "rank": 11
+    "rank": 13
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "3242140960",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "켈로그 그래놀라 시리얼 500G 4종 1+1+1 총 3팩 골라담기(현미/통귀리/넛츠앤씨드/크랜베리) + 저당 40g",
+    "image_link": "https://gdimg.gmarket.co.kr/3242140960/goodsimage?ver=38080906109",
+    "price": 18400,
+    "sale_price": 15640,
+    "sales_count": 202,
+    "discount_rate": 15,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D3242140960",
+    "rank": 14
+  },
+  {
+    "merchant_id": "lotteon",
+    "product_id": "LO2751851168",
+    "banner_url": "https://img.linkprice.com/files/glink/lotteon/20260303/0000u00000000_[롯데온]260303_로고/1_120x60.jpg",
+    "title": "[딜크릿][농할 국내산] 한돈 냉장 목살 1kg 돼지고기 : 롯데ON",
+    "image_link": "https://contents.lotteon.com/itemimage/20260820160516/LO/27/51/85/11/68/_2/75/18/51/17/0/LO2751851168_2751851170_1.jpg",
+    "price": 24900,
+    "sale_price": 23660,
+    "sales_count": 187,
+    "discount_rate": 4,
+    "commission": 1.4,
+    "click_url": "https://click.linkprice.com/click.php?m=lotteon&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.lotteon.com%2Fp%2Fproduct%2FLO2751851168",
+    "rank": 15
   },
   {
     "merchant_id": "aliexpress",
@@ -159,13 +215,13 @@
     "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
     "title": "팬 먼지 제거 브러시, 다기능 팬 브러시, 먼지 제거기, 구부릴 수 있는 스크린, 블라인드, 암호화된 청소 브러시",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Secc0aab8f2c3485d9a348cd4e3125c8fs.jpg",
-    "price": 11850,
-    "sale_price": 5068,
-    "sales_count": 174,
-    "discount_rate": 57,
+    "price": 11973,
+    "sale_price": 5249,
+    "sales_count": 165,
+    "discount_rate": 56,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012146885810.html",
-    "rank": 12
+    "rank": 16
   },
   {
     "merchant_id": "aliexpress",
@@ -179,7 +235,21 @@
     "discount_rate": 61,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012721198046.html",
-    "rank": 13
+    "rank": 17
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "2102614333",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "숨 순수 소프트 3겹 30m 30롤 2팩 100% 천연펄프 무형광 화장지 대용량 구성 가정용 업소용 추천",
+    "image_link": "https://gdimg.gmarket.co.kr/2102614333/goodsimage?ver=38178387565",
+    "price": 20900,
+    "sale_price": 17500,
+    "sales_count": 149,
+    "discount_rate": 16,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2102614333",
+    "rank": 18
   },
   {
     "merchant_id": "aliexpress",
@@ -189,25 +259,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S169e1235ae2845169db036ca4fd1d89cq.jpg",
     "price": 19990,
     "sale_price": 8731,
-    "sales_count": 147,
+    "sales_count": 145,
     "discount_rate": 56,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005006967349762.html",
-    "rank": 14
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "4774272099",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "(물가안정) 500개 한정 대추방울토마토 큰 로얄과(1-2번) 2kg",
-    "image_link": "https://gdimg.gmarket.co.kr/4774272099/goodsimage?ver=38162251406",
-    "price": 8400,
-    "sale_price": 7900,
-    "sales_count": 147,
-    "discount_rate": 5,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D4774272099",
-    "rank": 15
+    "rank": 19
   },
   {
     "merchant_id": "aliexpress",
@@ -216,26 +272,12 @@
     "title": "스마트 체지방 측정기, 정확한 지방률 측정, 신체 변화 모니터링, 가정용 건강 감지기, 슬리밍 및 체형 관리에 좋은 도우미",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S3a322d1832ae4f9b93e7638b75b75773k.jpg",
     "price": 62271,
-    "sale_price": 27200,
-    "sales_count": 146,
-    "discount_rate": 56,
+    "sale_price": 29890,
+    "sales_count": 145,
+    "discount_rate": 52,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005006863694963.html",
-    "rank": 16
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "3889892295",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "풀무원 워터루틴 생수 2L 24개(무/유라벨 랜덤발송)",
-    "image_link": "https://gdimg.gmarket.co.kr/3889892295/goodsimage?ver=38153939175",
-    "price": 15200,
-    "sale_price": 13990,
-    "sales_count": 142,
-    "discount_rate": 7,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D3889892295",
-    "rank": 17
+    "rank": 20
   },
   {
     "merchant_id": "aliexpress",
@@ -249,7 +291,35 @@
     "discount_rate": 59,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012206829577.html",
-    "rank": 18
+    "rank": 21
+  },
+  {
+    "merchant_id": "aliexpress",
+    "product_id": "1005011600003372",
+    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
+    "title": "에디파이어 Edifier M90 바이앰프 2.0 스피커 컴팩트 디자인 블루투스 V6.0 LDAC 하이 레졸루션 오디오 무선 스피커 (리모컨 포함) 100W RMS",
+    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S9901cc92932142339dc6bef0d0b667d1N.jpg",
+    "price": 355917,
+    "sale_price": 215381,
+    "sales_count": 140,
+    "discount_rate": 39,
+    "commission": 6.3,
+    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005011600003372.html",
+    "rank": 22
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "2242561796",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "오리온 초코파이 48P 1872g(1박스)",
+    "image_link": "https://gdimg.gmarket.co.kr/2242561796/goodsimage?ver=38142753001",
+    "price": 18600,
+    "sale_price": 13900,
+    "sales_count": 136,
+    "discount_rate": 25,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2242561796",
+    "rank": 23
   },
   {
     "merchant_id": "aliexpress",
@@ -259,39 +329,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S4010ffc3bed04b56aee654d4857adfdac.png",
     "price": 20550,
     "sale_price": 8790,
-    "sales_count": 140,
+    "sales_count": 134,
     "discount_rate": 57,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010216104174.html",
-    "rank": 19
-  },
-  {
-    "merchant_id": "aliexpress",
-    "product_id": "1005011600003372",
-    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
-    "title": "에디파이어 Edifier M90 바이앰프 2.0 스피커 컴팩트 디자인 블루투스 V6.0 LDAC 하이 레졸루션 오디오 무선 스피커 (리모컨 포함) 100W RMS",
-    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S9901cc92932142339dc6bef0d0b667d1N.jpg",
-    "price": 355917,
-    "sale_price": 215378,
-    "sales_count": 140,
-    "discount_rate": 39,
-    "commission": 6.3,
-    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005011600003372.html",
-    "rank": 20
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "4492514952",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "대건명가 돼지국밥 630g 5팩 사은품 (양념장 소금) 증정",
-    "image_link": "https://gdimg.gmarket.co.kr/4492514952/goodsimage?ver=38168566845",
-    "price": 24900,
-    "sale_price": 20930,
-    "sales_count": 136,
-    "discount_rate": 15,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D4492514952",
-    "rank": 21
+    "rank": 24
   },
   {
     "merchant_id": "aliexpress",
@@ -301,11 +343,25 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S6a359442cbe44b06bfe165aac51bbb44p.jpg",
     "price": 78276,
     "sale_price": 29721,
-    "sales_count": 133,
+    "sales_count": 132,
     "discount_rate": 62,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009418411818.html",
-    "rank": 22
+    "rank": 25
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "2809510617",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "리챔 오리지널 200g 10캔",
+    "image_link": "https://gdimg.gmarket.co.kr/2809510617/goodsimage",
+    "price": 34400,
+    "sale_price": 24110,
+    "sales_count": 130,
+    "discount_rate": 29,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2809510617",
+    "rank": 26
   },
   {
     "merchant_id": "aliexpress",
@@ -319,7 +375,7 @@
     "discount_rate": 52,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010724501614.html",
-    "rank": 23
+    "rank": 27
   },
   {
     "merchant_id": "aliexpress",
@@ -333,7 +389,7 @@
     "discount_rate": 57,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012756430808.html",
-    "rank": 24
+    "rank": 28
   },
   {
     "merchant_id": "aliexpress",
@@ -343,11 +399,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S6b6bc8f2b55b4bab82a79a5f02e41a28L.jpg",
     "price": 10169,
     "sale_price": 4353,
-    "sales_count": 123,
+    "sales_count": 119,
     "discount_rate": 57,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012254620888.html",
-    "rank": 25
+    "rank": 29
   },
   {
     "merchant_id": "aliexpress",
@@ -361,7 +417,7 @@
     "discount_rate": 22,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005008976362329.html",
-    "rank": 26
+    "rank": 30
   },
   {
     "merchant_id": "aliexpress",
@@ -370,12 +426,26 @@
     "title": "벤션 10000mAh 미니 보조배터리 22.5W 고속 충전 아이폰 17 16용 마그네틱 무선 충전기 애플워치 시리즈 11 10 9 호환",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S7dd14b95f01d49ebbade9918a1f7ed32M.jpg",
     "price": 69535,
-    "sale_price": 27812,
+    "sale_price": 27842,
     "sales_count": 116,
-    "discount_rate": 60,
+    "discount_rate": 59,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010775263810.html",
-    "rank": 27
+    "rank": 31
+  },
+  {
+    "merchant_id": "lotteon",
+    "product_id": "LO2702124448",
+    "banner_url": "https://img.linkprice.com/files/glink/lotteon/20260303/0000u00000000_[롯데온]260303_로고/1_120x60.jpg",
+    "title": "[삼다수][본사직영] 제주 삼다수 500ml 무라벨 40병 생수  : 롯데ON",
+    "image_link": "https://contents.lotteon.com/itemimage/20260616134840/LO/27/02/12/44/48/_2/70/21/24/44/9/LO2702124448_2702124449_1.jpg",
+    "price": 19200,
+    "sale_price": 16240,
+    "sales_count": 116,
+    "discount_rate": 15,
+    "commission": 1.4,
+    "click_url": "https://click.linkprice.com/click.php?m=lotteon&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.lotteon.com%2Fp%2Fproduct%2FLO2702124448",
+    "rank": 32
   },
   {
     "merchant_id": "aliexpress",
@@ -384,12 +454,12 @@
     "title": "ASOMETECH 300W GaN USB 충전기 LED 디스플레이 접이식 타입 C 케이블 100W 65W PD3.0 PPS 고속 충전 스테이션 (맥북, 삼성용)",
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Sf0189591c5ec42fda68cf40ec5af0a5bs.jpg",
     "price": 189829,
-    "sale_price": 78845,
+    "sale_price": 78675,
     "sales_count": 113,
     "discount_rate": 58,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012089647708.html",
-    "rank": 28
+    "rank": 33
   },
   {
     "merchant_id": "aliexpress",
@@ -403,7 +473,7 @@
     "discount_rate": 57,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005011707972780.html",
-    "rank": 29
+    "rank": 34
   },
   {
     "merchant_id": "aliexpress",
@@ -417,21 +487,7 @@
     "discount_rate": 54,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005007365800268.html",
-    "rank": 30
-  },
-  {
-    "merchant_id": "aliexpress",
-    "product_id": "1005009905982018",
-    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
-    "title": "4칸 리모컨 정리함 창의적인 데스크탑 수납 랙 플라스틱 홀더 다용도 책상 정리함",
-    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S975eb39e99f84542998b18a08b14f6550.jpg",
-    "price": 15535,
-    "sale_price": 6787,
-    "sales_count": 111,
-    "discount_rate": 56,
-    "commission": 6.3,
-    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009905982018.html",
-    "rank": 31
+    "rank": 35
   },
   {
     "merchant_id": "aliexpress",
@@ -445,7 +501,7 @@
     "discount_rate": 54,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005006384112217.html",
-    "rank": 32
+    "rank": 36
   },
   {
     "merchant_id": "aliexpress",
@@ -459,7 +515,21 @@
     "discount_rate": 60,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009084986255.html",
-    "rank": 33
+    "rank": 37
+  },
+  {
+    "merchant_id": "aliexpress",
+    "product_id": "1005009905982018",
+    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
+    "title": "4칸 리모컨 정리함 창의적인 데스크탑 수납 랙 플라스틱 홀더 다용도 책상 정리함",
+    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S975eb39e99f84542998b18a08b14f6550.jpg",
+    "price": 15535,
+    "sale_price": 6787,
+    "sales_count": 108,
+    "discount_rate": 56,
+    "commission": 6.3,
+    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009905982018.html",
+    "rank": 38
   },
   {
     "merchant_id": "aliexpress",
@@ -473,7 +543,7 @@
     "discount_rate": 0,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005012403304667.html",
-    "rank": 34
+    "rank": 39
   },
   {
     "merchant_id": "aliexpress",
@@ -483,25 +553,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S231406a275af4a28a272547605381f2fb.jpg",
     "price": 16615,
     "sale_price": 6779,
-    "sales_count": 104,
+    "sales_count": 103,
     "discount_rate": 59,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010362220392.html",
-    "rank": 35
-  },
-  {
-    "merchant_id": "lotteon",
-    "product_id": "LO2747568157",
-    "banner_url": "https://img.linkprice.com/files/glink/lotteon/20260303/0000u00000000_[롯데온]260303_로고/1_120x60.jpg",
-    "title": "[오리온][딜크릿] 오리온 무뚝뚝감자칩 60g 12개 : 롯데ON",
-    "image_link": "https://contents.lotteon.com/itemimage/20260814102716/LO/27/47/56/81/57/_2/74/75/68/15/8/LO2747568157_2747568158_1.jpg",
-    "price": 22800,
-    "sale_price": 17790,
-    "sales_count": 103,
-    "discount_rate": 21,
-    "commission": 1.4,
-    "click_url": "https://click.linkprice.com/click.php?m=lotteon&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.lotteon.com%2Fp%2Fproduct%2FLO2747568157",
-    "rank": 36
+    "rank": 40
   },
   {
     "merchant_id": "aliexpress",
@@ -515,7 +571,21 @@
     "discount_rate": 57,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010759661053.html",
-    "rank": 37
+    "rank": 41
+  },
+  {
+    "merchant_id": "gmarket",
+    "product_id": "4053160767",
+    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
+    "title": "밥알없는 비락식혜 175ml x 60캔 0칼로리",
+    "image_link": "https://gdimg.gmarket.co.kr/4053160767/goodsimage?ver=36966730447",
+    "price": 23600,
+    "sale_price": 17000,
+    "sales_count": 100,
+    "discount_rate": 27,
+    "commission": 0.6,
+    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D4053160767",
+    "rank": 42
   },
   {
     "merchant_id": "aliexpress",
@@ -525,25 +595,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S07769dc7616e462b882c428d290dbab12.jpg",
     "price": 7069,
     "sale_price": 2958,
-    "sales_count": 98,
+    "sales_count": 96,
     "discount_rate": 58,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005007345400476.html",
-    "rank": 38
-  },
-  {
-    "merchant_id": "lotteon",
-    "product_id": "LO2602193141",
-    "banner_url": "https://img.linkprice.com/files/glink/lotteon/20260303/0000u00000000_[롯데온]260303_로고/1_120x60.jpg",
-    "title": "[백년기업 대우미곡][최종 28,920원] 삼대 새청무쌀 10kg 상등급 (25년산, 출고당일도정) : 롯데ON",
-    "image_link": "https://contents.lotteon.com/itemimage/20260819150841/LO/26/02/19/31/41/_2/60/21/93/14/2/LO2602193141_2602193142_1.jpg",
-    "price": 33600,
-    "sale_price": 31920,
-    "sales_count": 98,
-    "discount_rate": 5,
-    "commission": 1.4,
-    "click_url": "https://click.linkprice.com/click.php?m=lotteon&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.lotteon.com%2Fp%2Fproduct%2FLO2602193141",
-    "rank": 39
+    "rank": 43
   },
   {
     "merchant_id": "aliexpress",
@@ -553,39 +609,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Sf9db9a7b91a2463f9cd0db0f98b636749.jpg",
     "price": 20554,
     "sale_price": 9558,
-    "sales_count": 97,
+    "sales_count": 95,
     "discount_rate": 53,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005008588791794.html",
-    "rank": 40
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "4823872790",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "국내산 생육 닭목살 1kg 2개 쫄깃 담백 닭고기",
-    "image_link": "https://gdimg.gmarket.co.kr/4823872790/goodsimage?ver=38164788286",
-    "price": 17900,
-    "sale_price": 14860,
-    "sales_count": 97,
-    "discount_rate": 16,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D4823872790",
-    "rank": 41
-  },
-  {
-    "merchant_id": "aliexpress",
-    "product_id": "1005005566056407",
-    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
-    "title": "1/3/5M 양면 테이프 투명 아크릴 재사용 가능한 방수 접착제 Tracsless 테이프 가제트 Cinta Doble Cara Nano Tapes",
-    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S2787cfa5a69c418e94e0daacaf4d41a7W.png",
-    "price": 17100,
-    "sale_price": 4511,
-    "sales_count": 94,
-    "discount_rate": 73,
-    "commission": 6.3,
-    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005005566056407.html",
-    "rank": 42
+    "rank": 44
   },
   {
     "merchant_id": "aliexpress",
@@ -595,11 +623,25 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Sb8c9b2cfc19e4469b4d0fcfb90387ceeC.jpg",
     "price": 71158,
     "sale_price": 36293,
-    "sales_count": 94,
+    "sales_count": 93,
     "discount_rate": 48,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010724623265.html",
-    "rank": 43
+    "rank": 45
+  },
+  {
+    "merchant_id": "aliexpress",
+    "product_id": "1005005566056407",
+    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
+    "title": "1/3/5M 양면 테이프 투명 아크릴 재사용 가능한 방수 접착제 Tracsless 테이프 가제트 Cinta Doble Cara Nano Tapes",
+    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S2787cfa5a69c418e94e0daacaf4d41a7W.png",
+    "price": 17100,
+    "sale_price": 4532,
+    "sales_count": 92,
+    "discount_rate": 73,
+    "commission": 6.3,
+    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005005566056407.html",
+    "rank": 46
   },
   {
     "merchant_id": "aliexpress",
@@ -609,67 +651,11 @@
     "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/Se38cf506682c4b4782032e1038a90984o.png",
     "price": 10465,
     "sale_price": 4571,
-    "sales_count": 93,
+    "sales_count": 92,
     "discount_rate": 56,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009054845937.html",
-    "rank": 44
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "1772247575",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "2080 오리지날 칫솔 탄력모/미세모 2종 5+5개입 3세트 (총30개)",
-    "image_link": "https://gdimg.gmarket.co.kr/1772247575/goodsimage?ver=38022762136",
-    "price": 27100,
-    "sale_price": 11980,
-    "sales_count": 91,
-    "discount_rate": 55,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D1772247575",
-    "rank": 45
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "2412104235",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "(신선집중) 경주시농협  이사금 10kg / 당일도정 25년 햅쌀",
-    "image_link": "https://gdimg.gmarket.co.kr/2412104235/goodsimage?ver=38149892893",
-    "price": 35900,
-    "sale_price": 28900,
-    "sales_count": 91,
-    "discount_rate": 19,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D2412104235",
-    "rank": 46
-  },
-  {
-    "merchant_id": "11st",
-    "product_id": "599378817",
-    "banner_url": "https://img.linkprice.com/files/glink/11st/20220907/00062dUQWu000_11st_logo(120x60).png",
-    "title": "맥심 카누 다크 / 마일드 미니 240T 외 [아메리카노/원두커피/디카페인/라떼/커피믹스]",
-    "image_link": "https://cdn.011st.com/11dims/resize/1000x1000/quality/75/11src/dl/v2/3/7/8/8/1/7/QafAw/599378817_236877629.webp",
-    "price": 49880,
-    "sale_price": 44900,
-    "sales_count": 91,
-    "discount_rate": 9,
-    "commission": 1.05,
-    "click_url": "https://click.linkprice.com/click.php?m=11st&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fwww.11st.co.kr%2Fproducts%2F599378817",
     "rank": 47
-  },
-  {
-    "merchant_id": "gmarket",
-    "product_id": "1579120887",
-    "banner_url": "https://img.linkprice.com/api/popular_products/logo/gmarket.png",
-    "title": "(신선집중) 소문난오부자 재래도시락김5g 54봉",
-    "image_link": "https://gdimg.gmarket.co.kr/1579120887/goodsimage?ver=38152820877",
-    "price": 20900,
-    "sale_price": 19650,
-    "sales_count": 90,
-    "discount_rate": 5,
-    "commission": 0.6,
-    "click_url": "https://click.linkprice.com/click.php?m=gmarket&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fitem.gmarket.co.kr%2FItem%3Fgoodscode%3D1579120887",
-    "rank": 48
   },
   {
     "merchant_id": "aliexpress",
@@ -683,7 +669,7 @@
     "discount_rate": 53,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005010661950273.html",
-    "rank": 49
+    "rank": 48
   },
   {
     "merchant_id": "aliexpress",
@@ -697,6 +683,20 @@
     "discount_rate": 59,
     "commission": 6.3,
     "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009173829374.html",
+    "rank": 49
+  },
+  {
+    "merchant_id": "aliexpress",
+    "product_id": "1005009831427994",
+    "banner_url": "https://img.linkprice.com/files/glink/aliexpress/20240328/600GgnC4eLAW0_120_60.png",
+    "title": "마그네틱 택배 개봉 칼 다기능 휴대용 택배 개봉 칼 접이식 자동 잠금 반동 아트 칼 도구",
+    "image_link": "https://ae-pic-a1.aliexpress-media.com/kf/S9577b40593cc4431bf5ac013aa4fd004I.jpg",
+    "price": 10249,
+    "sale_price": 4560,
+    "sales_count": 85,
+    "discount_rate": 55,
+    "commission": 6.3,
+    "click_url": "https://click.linkprice.com/click.php?m=aliexpress&a=A100681208&l=9999&l_cd1=D&l_cd2=H&tu=https%3A%2F%2Fko.aliexpress.com%2Fitem%2F1005009831427994.html",
     "rank": 50
   }
 ]
